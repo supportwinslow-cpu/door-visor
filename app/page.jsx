@@ -150,8 +150,8 @@ export default function LandingPage() {
     "Nexon",
     "Set 4",
     "Set 6",
-    "1025",
-    "1500",
+    "500",
+    "1100",
   ];
 
   const clearAllFilters = () => {
@@ -298,8 +298,8 @@ export default function LandingPage() {
           <div className="relative grid grid-cols-2 gap-3 pb-8 lg:hidden">
             <StatCard label="Products" value={`${totalProducts}+`} dark />
             <StatCard label="Brands" value={`${totalBrands}+`} dark />
-            <StatCard label="4 Set" value="₹1025" dark />
-            <StatCard label="6 Set" value="₹1500" dark />
+            <StatCard label="4 Set" value="₹500" dark />
+            <StatCard label="6 Set" value="1100" dark />
           </div>
         </div>
       </section>
