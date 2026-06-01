@@ -274,8 +274,8 @@ export default function LandingPage() {
                   <div className="grid grid-cols-2 gap-3">
                     <StatCard label="Products" value={`${totalProducts}+`} />
                     <StatCard label="Brands" value={`${totalBrands}+`} />
-                    <StatCard label="4 Set Price" value="₹1025" />
-                    <StatCard label="6 Set Price" value="₹1500" />
+                    <StatCard label="4 Set Price" value="₹500" />
+                    <StatCard label="6 Set Price" value="₹1100" />
                   </div>
 
                   <div className="mt-4 rounded-3xl bg-linear-to-br from-blue-50 to-slate-100 p-4">
