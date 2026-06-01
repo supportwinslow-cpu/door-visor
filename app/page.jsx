@@ -2,8 +2,6 @@
 
 import { useMemo, useState } from "react";
 import products from "@/app/data/products";
-// Agar file src/data/products.js me hai to upar wali line ko ye kar dena:
-// import products from "@/data/products";
 
 export default function LandingPage() {
   const [search, setSearch] = useState("");
@@ -199,7 +197,7 @@ export default function LandingPage() {
               </div>
 
               <h1 className="max-w-4xl text-4xl font-black leading-[1.05] tracking-tight md:text-6xl">
-                Find Perfect Door Visor For Your Car
+                Smoke  Door Visor For Your Car
               </h1>
 
               <p className="mt-5 max-w-2xl text-base leading-7 text-white/75 md:text-lg">
