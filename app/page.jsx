@@ -7,6 +7,7 @@ import products from "@/app/data/products";
 
 export default function LandingPage() {
   const [search, setSearch] = useState("");
+  const [selectedBrand, setSelectedBrand] = useState("all");
   const [showSmoke, setShowSmoke] = useState(false);
   const [showChromeline, setShowChromeline] = useState(false);
 
@@ -24,6 +25,13 @@ export default function LandingPage() {
       .replace(/[^a-z0-9]/g, "");
   };
 
+  const splitBrands = (brandText) => {
+    return String(brandText || "")
+      .split("/")
+      .map((brand) => brand.trim())
+      .filter(Boolean);
+  };
+
   const getCarName = (product) => {
     if (product.carName) return product.carName;
     if (Array.isArray(product.carModel)) return product.carModel.join(" / ");
@@ -34,6 +42,10 @@ export default function LandingPage() {
     if (product.brandName) return product.brandName;
     if (Array.isArray(product.carBrand)) return product.carBrand.join(" / ");
     return product.carBrand || "Brand";
+  };
+
+  const getProductBrands = (product) => {
+    return splitBrands(getBrandName(product));
   };
 
   const getYear = (product) => {
@@ -99,6 +111,16 @@ export default function LandingPage() {
     return "Smoke";
   };
 
+  const brandOptions = useMemo(() => {
+    const brands = new Set();
+
+    products.forEach((product) => {
+      getProductBrands(product).forEach((brand) => brands.add(brand));
+    });
+
+    return Array.from(brands).sort((a, b) => a.localeCompare(b));
+  }, []);
+
   const getSearchText = (product) => {
     return [
       product.id,
@@ -139,38 +161,52 @@ export default function LandingPage() {
   };
 
   const hasActiveSelection =
-    normalize(search) || showSmoke || showChromeline;
+    normalize(search) || selectedBrand !== "all" || showSmoke || showChromeline;
 
   const displayProducts = useMemo(() => {
     const query = normalize(search);
 
     // Default me product show nahi honge
-    if (!query && !showSmoke && !showChromeline) {
+    if (!query && selectedBrand === "all" && !showSmoke && !showChromeline) {
       return [];
     }
 
-    // Smoke / Chromeline select karne par sare products show honge
-    if (!query) {
-      return products;
+    let filteredProducts = products;
+
+    // Brand select karne par us brand ki cars show hongi
+    if (selectedBrand !== "all") {
+      filteredProducts = filteredProducts.filter((product) =>
+        getProductBrands(product).some(
+          (brand) => normalize(brand) === normalize(selectedBrand)
+        )
+      );
     }
 
-    const queryWords = query.split(" ").filter(Boolean);
+    // Search filter
+    if (query) {
+      const queryWords = query.split(" ").filter(Boolean);
 
-    return products.filter((product) => {
-      const text = getSearchText(product);
-      const normalText = normalize(text);
-      const compactText = compact(text);
+      filteredProducts = filteredProducts.filter((product) => {
+        const text = getSearchText(product);
+        const normalText = normalize(text);
+        const compactText = compact(text);
 
-      return queryWords.every((word) => {
-        return normalText.includes(word) || compactText.includes(compact(word));
+        return queryWords.every((word) => {
+          return (
+            normalText.includes(word) || compactText.includes(compact(word))
+          );
+        });
       });
-    });
-  }, [search, showSmoke, showChromeline]);
+    }
+
+    return filteredProducts;
+  }, [search, selectedBrand, showSmoke, showChromeline]);
 
   const totalProducts = products.length;
 
   const clearAllFilters = () => {
     setSearch("");
+    setSelectedBrand("all");
     setShowSmoke(false);
     setShowChromeline(false);
   };
@@ -185,8 +221,9 @@ export default function LandingPage() {
               <h1 className="text-xl font-black tracking-tight md:text-3xl">
                 Door Visor List
               </h1>
+
               <p className="mt-0.5 text-xs font-semibold text-gray-500 md:text-sm">
-                Search karo ya pricing type select karo
+                Search, brand ya pricing type select karo
               </p>
             </div>
 
@@ -201,6 +238,7 @@ export default function LandingPage() {
           </div>
 
           <div className="space-y-3">
+            {/* Search */}
             <div className="flex items-center gap-2 rounded-2xl bg-[#f4f7fb] px-3 py-3 ring-1 ring-gray-200 focus-within:ring-2 focus-within:ring-blue-600">
               <span className="text-lg">🔍</span>
 
@@ -222,12 +260,28 @@ export default function LandingPage() {
               )}
             </div>
 
+            {/* Brand Select */}
+            <select
+              value={selectedBrand}
+              onChange={(e) => setSelectedBrand(e.target.value)}
+              className="w-full rounded-2xl bg-white px-4 py-3 text-sm font-black text-[#111827] shadow-sm outline-none ring-1 ring-gray-200 focus:ring-2 focus:ring-blue-600 md:text-base"
+            >
+              <option value="all">Select Car Brand</option>
+              {brandOptions.map((brand) => (
+                <option key={brand} value={brand}>
+                  {brand}
+                </option>
+              ))}
+            </select>
+
+            {/* Price Type */}
             <div className="grid grid-cols-2 gap-2">
               <label
-                className={`flex cursor-pointer items-center justify-center gap-2 rounded-2xl px-3 py-3 text-center text-xs font-black shadow-sm ring-1 transition md:text-sm ${showSmoke
+                className={`flex cursor-pointer items-center justify-center gap-2 rounded-2xl px-3 py-3 text-center text-xs font-black shadow-sm ring-1 transition md:text-sm ${
+                  showSmoke
                     ? "bg-[#111827] text-white ring-[#111827]"
                     : "bg-white text-[#111827] ring-gray-200"
-                  }`}
+                }`}
               >
                 <input
                   type="checkbox"
@@ -240,10 +294,11 @@ export default function LandingPage() {
               </label>
 
               <label
-                className={`flex cursor-pointer items-center justify-center gap-2 rounded-2xl px-3 py-3 text-center text-xs font-black shadow-sm ring-1 transition md:text-sm ${showChromeline
+                className={`flex cursor-pointer items-center justify-center gap-2 rounded-2xl px-3 py-3 text-center text-xs font-black shadow-sm ring-1 transition md:text-sm ${
+                  showChromeline
                     ? "bg-blue-700 text-white ring-blue-700"
                     : "bg-white text-[#111827] ring-gray-200"
-                  }`}
+                }`}
               >
                 <input
                   type="checkbox"
@@ -273,6 +328,7 @@ export default function LandingPage() {
                   ? `${displayProducts.length} found`
                   : "Search to view"}
               </h2>
+
               <p className="mt-1 text-xs font-semibold text-gray-500 md:text-sm">
                 Total products available: {totalProducts}
               </p>
@@ -289,6 +345,12 @@ export default function LandingPage() {
               </div>
             )}
           </div>
+
+          {selectedBrand !== "all" && (
+            <p className="mt-3 w-fit rounded-full bg-blue-50 px-3 py-1.5 text-xs font-black text-blue-700">
+              Brand: {selectedBrand}
+            </p>
+          )}
         </div>
       </section>
 
@@ -357,8 +419,8 @@ function StartSearchBox() {
       <h3 className="mt-5 text-2xl font-black">Search Your Car</h3>
 
       <p className="mx-auto mt-2 max-w-md text-sm font-medium text-gray-500">
-        Product list dekhne ke liye car name search karo ya Smoke / Chromeline
-        pricing select karo.
+        Product list dekhne ke liye car name search karo, brand select karo ya
+        Smoke / Chromeline pricing select karo.
       </p>
     </div>
   );
