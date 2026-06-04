@@ -138,9 +138,18 @@ export default function LandingPage() {
     ].join(" ");
   };
 
+  const hasActiveSelection =
+    normalize(search) || showSmoke || showChromeline;
+
   const displayProducts = useMemo(() => {
     const query = normalize(search);
 
+    // Default me product show nahi honge
+    if (!query && !showSmoke && !showChromeline) {
+      return [];
+    }
+
+    // Smoke / Chromeline select karne par sare products show honge
     if (!query) {
       return products;
     }
@@ -166,117 +175,133 @@ export default function LandingPage() {
     setShowChromeline(false);
   };
 
-  const isFiltered = search || showSmoke || showChromeline;
-
   return (
     <main className="min-h-screen bg-[#f4f7fb] text-[#111827]">
-      {/* Top Search Bar */}
-      <section className="sticky top-0 z-50 border-b border-gray-200 bg-white/90 px-4 py-4 shadow-sm backdrop-blur-xl">
+      {/* Mobile First Top Search */}
+      <section className="sticky top-0 z-50 border-b border-gray-200 bg-white/95 px-3 py-3 shadow-sm backdrop-blur-xl md:px-5">
         <div className="mx-auto max-w-7xl">
-          <div className="mb-4 flex flex-col justify-between gap-2 md:flex-row md:items-center">
+          <div className="mb-3 flex items-start justify-between gap-3">
             <div>
-              <h1 className="text-2xl font-black tracking-tight md:text-3xl">
-                Door Visor Product List
+              <h1 className="text-xl font-black tracking-tight md:text-3xl">
+                Door Visor List
               </h1>
-
-              <p className="mt-1 text-sm font-semibold text-gray-500">
-                Search karo ya Smoke / Chromeline pricing select karo
+              <p className="mt-0.5 text-xs font-semibold text-gray-500 md:text-sm">
+                Search karo ya pricing type select karo
               </p>
             </div>
 
-            {isFiltered && (
+            {hasActiveSelection && (
               <button
                 onClick={clearAllFilters}
-                className="w-fit rounded-full bg-[#111827] px-5 py-2.5 text-sm font-black text-white shadow transition hover:bg-blue-700"
+                className="shrink-0 rounded-full bg-[#111827] px-4 py-2 text-xs font-black text-white shadow md:text-sm"
               >
-                Clear Filters
+                Clear
               </button>
             )}
           </div>
 
-          <div className="grid gap-3 lg:grid-cols-[1.5fr_1fr]">
-            <div className="flex items-center gap-3 rounded-2xl bg-[#f4f7fb] px-4 py-3 ring-1 ring-gray-200 transition focus-within:ring-2 focus-within:ring-blue-600">
-              <span className="text-xl">🔍</span>
+          <div className="space-y-3">
+            <div className="flex items-center gap-2 rounded-2xl bg-[#f4f7fb] px-3 py-3 ring-1 ring-gray-200 focus-within:ring-2 focus-within:ring-blue-600">
+              <span className="text-lg">🔍</span>
 
               <input
                 type="text"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                placeholder="Search: Creta, Scorpio, Baleno 2022, Set 6..."
-                className="w-full bg-transparent text-base font-semibold text-black outline-none placeholder:text-gray-400"
+                placeholder="Search: Creta, Scorpio, Baleno..."
+                className="w-full bg-transparent text-sm font-bold text-black outline-none placeholder:text-gray-400 md:text-base"
               />
 
               {search && (
                 <button
                   onClick={() => setSearch("")}
-                  className="rounded-full bg-gray-200 px-3 py-2 text-sm font-black text-gray-700 transition hover:bg-gray-300"
+                  className="rounded-full bg-gray-200 px-2.5 py-1.5 text-xs font-black text-gray-700"
                 >
                   ✕
                 </button>
               )}
             </div>
 
-            <div className="grid gap-3 rounded-2xl bg-[#f4f7fb] p-3 ring-1 ring-gray-200 sm:grid-cols-2">
-              <label className="flex cursor-pointer items-center gap-3 rounded-xl bg-white px-4 py-3 shadow-sm transition hover:bg-blue-50">
+            <div className="grid grid-cols-2 gap-2">
+              <label
+                className={`flex cursor-pointer items-center justify-center gap-2 rounded-2xl px-3 py-3 text-center text-xs font-black shadow-sm ring-1 transition md:text-sm ${showSmoke
+                    ? "bg-[#111827] text-white ring-[#111827]"
+                    : "bg-white text-[#111827] ring-gray-200"
+                  }`}
+              >
                 <input
                   type="checkbox"
                   checked={showSmoke}
                   onChange={(e) => setShowSmoke(e.target.checked)}
-                  className="h-5 w-5 accent-blue-700"
+                  className="hidden"
                 />
-                <span className="text-sm font-black text-[#111827]">
-                  Smoke Door Visor
-                </span>
+                <span>{showSmoke ? "✓" : ""}</span>
+                Smoke
               </label>
 
-              <label className="flex cursor-pointer items-center gap-3 rounded-xl bg-white px-4 py-3 shadow-sm transition hover:bg-blue-50">
+              <label
+                className={`flex cursor-pointer items-center justify-center gap-2 rounded-2xl px-3 py-3 text-center text-xs font-black shadow-sm ring-1 transition md:text-sm ${showChromeline
+                    ? "bg-blue-700 text-white ring-blue-700"
+                    : "bg-white text-[#111827] ring-gray-200"
+                  }`}
+              >
                 <input
                   type="checkbox"
                   checked={showChromeline}
                   onChange={(e) => setShowChromeline(e.target.checked)}
-                  className="h-5 w-5 accent-blue-700"
+                  className="hidden"
                 />
-                <span className="text-sm font-black text-[#111827]">
-                  Chromeline Door Visor
-                </span>
+                <span>{showChromeline ? "✓" : ""}</span>
+                Chromeline
               </label>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Products Data List */}
-      <section className="mx-auto max-w-7xl px-4 py-8">
-        <div className="mb-6 flex flex-col justify-between gap-3 md:flex-row md:items-end">
-          <div>
-            <p className="text-sm font-black uppercase tracking-[0.2em] text-blue-600">
-              {isFiltered ? "Filtered Products" : "All Products"}
-            </p>
+      {/* Status / Count */}
+      <section className="mx-auto max-w-7xl px-3 py-4 md:px-5 md:py-6">
+        <div className="rounded-3xl bg-white p-4 shadow-sm ring-1 ring-gray-100">
+          <p className="text-xs font-black uppercase tracking-[0.18em] text-blue-600">
+            {hasActiveSelection ? "Products" : "Start Search"}
+          </p>
 
-            <h2 className="mt-2 text-2xl font-black tracking-tight md:text-4xl">
-              {displayProducts.length} products found
-            </h2>
-
-            <p className="mt-2 text-sm font-semibold text-gray-500">
-              Total products: {totalProducts}
-            </p>
-          </div>
-        </div>
-
-        {displayProducts.length > 0 ? (
-          <div className="overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-sm">
-            <div className="hidden bg-[#111827] px-5 py-4 text-xs font-black uppercase tracking-[0.16em] text-white md:grid md:grid-cols-[1.1fr_2fr_0.8fr_1fr_1fr_1fr] md:gap-4">
-              <p>Car Company</p>
-              <p>Car Name</p>
-              <p>Set</p>
-              <p>Price</p>
-              <p>Year</p>
-              <p>Type</p>
+          <div className="mt-2 flex items-end justify-between gap-3">
+            <div>
+              <h2 className="text-2xl font-black tracking-tight md:text-4xl">
+                {hasActiveSelection
+                  ? `${displayProducts.length} found`
+                  : "Search to view"}
+              </h2>
+              <p className="mt-1 text-xs font-semibold text-gray-500 md:text-sm">
+                Total products available: {totalProducts}
+              </p>
             </div>
 
-            <div className="divide-y divide-gray-100">
+            {hasActiveSelection && (
+              <div className="rounded-2xl bg-green-50 px-3 py-2 text-right">
+                <p className="text-[10px] font-black uppercase text-green-600">
+                  Showing
+                </p>
+                <p className="text-sm font-black text-green-700">
+                  {getDisplayType()}
+                </p>
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* Product Results */}
+      <section className="mx-auto max-w-7xl px-3 pb-10 md:px-5">
+        {!hasActiveSelection ? (
+          <StartSearchBox />
+        ) : displayProducts.length > 0 ? (
+          <>
+            {/* Mobile Cards */}
+            <div className="grid gap-3 md:hidden">
               {displayProducts.map((product) => (
-                <ProductListRow
+                <MobileProductCard
                   key={product.id}
                   carCompany={getBrandName(product)}
                   carName={getCarName(product)}
@@ -287,27 +312,59 @@ export default function LandingPage() {
                 />
               ))}
             </div>
-          </div>
-        ) : (
-          <div className="rounded-3xl border border-gray-100 bg-white p-10 text-center shadow-sm">
-            <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-blue-50 text-3xl">
-              🔎
+
+            {/* Desktop Table */}
+            <div className="hidden overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-sm md:block">
+              <div className="grid grid-cols-[1.1fr_2fr_0.8fr_1fr_1fr_1fr] gap-4 bg-[#111827] px-5 py-4 text-xs font-black uppercase tracking-[0.16em] text-white">
+                <p>Car Company</p>
+                <p>Car Name</p>
+                <p>Set</p>
+                <p>Price</p>
+                <p>Year</p>
+                <p>Type</p>
+              </div>
+
+              <div className="divide-y divide-gray-100">
+                {displayProducts.map((product) => (
+                  <DesktopProductRow
+                    key={product.id}
+                    carCompany={getBrandName(product)}
+                    carName={getCarName(product)}
+                    setCount={getSetCount(product)}
+                    price={getDisplayPrice(product)}
+                    year={getYear(product)}
+                    visorType={getDisplayType()}
+                  />
+                ))}
+              </div>
             </div>
-
-            <h3 className="mt-5 text-2xl font-black">No product found</h3>
-
-            <p className="mx-auto mt-2 max-w-md text-sm font-medium text-gray-500">
-              Try searching Creta, Scorpio, Swift, Baleno, Nexon, Venue, Set 4
-              or Set 6.
-            </p>
-          </div>
+          </>
+        ) : (
+          <NoProducts />
         )}
       </section>
     </main>
   );
 }
 
-function ProductListRow({
+function StartSearchBox() {
+  return (
+    <div className="rounded-3xl border border-gray-100 bg-white p-8 text-center shadow-sm">
+      <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-blue-50 text-3xl">
+        🚗
+      </div>
+
+      <h3 className="mt-5 text-2xl font-black">Search Your Car</h3>
+
+      <p className="mx-auto mt-2 max-w-md text-sm font-medium text-gray-500">
+        Product list dekhne ke liye car name search karo ya Smoke / Chromeline
+        pricing select karo.
+      </p>
+    </div>
+  );
+}
+
+function MobileProductCard({
   carCompany,
   carName,
   setCount,
@@ -316,60 +373,94 @@ function ProductListRow({
   visorType,
 }) {
   return (
-    <div className="grid gap-3 px-5 py-5 transition hover:bg-blue-50/50 md:grid-cols-[1.1fr_2fr_0.8fr_1fr_1fr_1fr] md:items-center md:gap-4">
-      <div>
-        <p className="mb-1 text-[10px] font-black uppercase tracking-[0.16em] text-gray-400 md:hidden">
-          Car Company
-        </p>
+    <div className="rounded-3xl bg-white p-4 shadow-sm ring-1 ring-gray-100">
+      <div className="mb-3 flex items-start justify-between gap-3">
+        <div>
+          <p className="w-fit rounded-full bg-blue-50 px-3 py-1.5 text-xs font-black text-blue-700">
+            {carCompany}
+          </p>
 
-        <p className="w-fit rounded-full bg-blue-50 px-3 py-1.5 text-sm font-black text-blue-700">
-          {carCompany}
-        </p>
+          <h3 className="mt-3 text-base font-black leading-snug text-[#111827]">
+            {carName}
+          </h3>
+        </div>
+
+        <div className="shrink-0 rounded-2xl bg-green-50 px-3 py-2 text-right">
+          <p className="text-[10px] font-black uppercase text-green-600">
+            Price
+          </p>
+          <p className="text-lg font-black leading-tight text-green-700">
+            {price}
+          </p>
+        </div>
       </div>
 
-      <div>
-        <p className="mb-1 text-[10px] font-black uppercase tracking-[0.16em] text-gray-400 md:hidden">
-          Car Name
-        </p>
+      <div className="grid grid-cols-3 gap-2">
+        <MiniInfo label="Set" value={setCount} />
+        <MiniInfo label="Year" value={year} />
+        <MiniInfo label="Type" value={visorType} />
+      </div>
+    </div>
+  );
+}
 
-        <p className="text-base font-black leading-snug text-[#111827]">
-          {carName}
-        </p>
+function MiniInfo({ label, value }) {
+  return (
+    <div className="rounded-2xl bg-[#f4f7fb] p-3">
+      <p className="text-[9px] font-black uppercase tracking-[0.14em] text-gray-400">
+        {label}
+      </p>
+      <p className="mt-1 line-clamp-1 text-xs font-black text-gray-800">
+        {value}
+      </p>
+    </div>
+  );
+}
+
+function DesktopProductRow({
+  carCompany,
+  carName,
+  setCount,
+  price,
+  year,
+  visorType,
+}) {
+  return (
+    <div className="grid grid-cols-[1.1fr_2fr_0.8fr_1fr_1fr_1fr] items-center gap-4 px-5 py-5 transition hover:bg-blue-50/50">
+      <p className="w-fit rounded-full bg-blue-50 px-3 py-1.5 text-sm font-black text-blue-700">
+        {carCompany}
+      </p>
+
+      <p className="text-base font-black leading-snug text-[#111827]">
+        {carName}
+      </p>
+
+      <p className="text-sm font-black text-gray-700">{setCount}</p>
+
+      <p className="text-lg font-black text-green-700">{price}</p>
+
+      <p className="text-sm font-bold text-gray-600">{year}</p>
+
+      <p className="w-fit rounded-full bg-gray-100 px-3 py-1.5 text-sm font-black text-gray-700">
+        {visorType}
+      </p>
+    </div>
+  );
+}
+
+function NoProducts() {
+  return (
+    <div className="rounded-3xl border border-gray-100 bg-white p-10 text-center shadow-sm">
+      <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-blue-50 text-3xl">
+        🔎
       </div>
 
-      <div>
-        <p className="mb-1 text-[10px] font-black uppercase tracking-[0.16em] text-gray-400 md:hidden">
-          Set
-        </p>
+      <h3 className="mt-5 text-2xl font-black">No product found</h3>
 
-        <p className="text-sm font-black text-gray-700">{setCount}</p>
-      </div>
-
-      <div>
-        <p className="mb-1 text-[10px] font-black uppercase tracking-[0.16em] text-gray-400 md:hidden">
-          Price
-        </p>
-
-        <p className="text-lg font-black text-green-700">{price}</p>
-      </div>
-
-      <div>
-        <p className="mb-1 text-[10px] font-black uppercase tracking-[0.16em] text-gray-400 md:hidden">
-          Year
-        </p>
-
-        <p className="text-sm font-bold text-gray-600">{year}</p>
-      </div>
-
-      <div>
-        <p className="mb-1 text-[10px] font-black uppercase tracking-[0.16em] text-gray-400 md:hidden">
-          Type
-        </p>
-
-        <p className="w-fit rounded-full bg-gray-100 px-3 py-1.5 text-sm font-black text-gray-700">
-          {visorType}
-        </p>
-      </div>
+      <p className="mx-auto mt-2 max-w-md text-sm font-medium text-gray-500">
+        Try searching Creta, Scorpio, Swift, Baleno, Nexon, Venue, Set 4 or Set
+        6.
+      </p>
     </div>
   );
 }
