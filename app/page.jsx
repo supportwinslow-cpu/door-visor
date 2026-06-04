@@ -338,52 +338,26 @@ export default function LandingPage() {
 
   return (
     <main className="min-h-screen bg-[#f5f7fb] text-[#101827]">
+
       {/* Header */}
-      <section className="border-b border-gray-200 bg-white px-4 py-4 shadow-sm">
+      <section className="border-b border-gray-200 bg-white px-4 py-3 shadow-sm">
         <div className="mx-auto max-w-6xl">
-          <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+          <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
             <div>
-              <h1 className="mt-1 text-2xl font-black leading-tight tracking-tight text-[#101827]">
+              <h1 className="text-xl font-black leading-tight tracking-tight text-[#101827] md:text-2xl">
                 Find Your Car Accessory
               </h1>
 
-              <p className="mt-1 text-sm font-semibold text-gray-500">
+              <p className="mt-0.5 text-xs font-semibold text-gray-500 md:text-sm">
                 Check the price of Door Visor and Parcel Tray instantly.
               </p>
             </div>
 
-            <div className="flex items-center gap-2 md:justify-end">
-              <div className="rounded-2xl bg-[#f3f6fb] p-2 ring-1 ring-gray-200">
-                <p className="mb-1 text-[10px] font-black uppercase tracking-[0.14em] text-blue-700">
-                  Discount
-                </p>
 
-                <select
-                  value={selectedDiscount}
-                  onChange={(e) => setSelectedDiscount(Number(e.target.value))}
-                  className="w-full rounded-xl bg-white px-3 py-2 text-xs font-black text-[#101827] outline-none ring-1 ring-gray-200 focus:ring-2 focus:ring-blue-600 md:w-36"
-                >
-                  <option value={0}>No Discount</option>
-                  {discountOptions.map((discount) => (
-                    <option key={discount} value={discount}>
-                      {discount}% OFF
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              {(hasActiveSelection || selectedDiscount > 0) && (
-                <button
-                  onClick={clearAllFilters}
-                  className="shrink-0 rounded-full bg-[#101827] px-4 py-2 text-xs font-black text-white shadow-sm"
-                >
-                  Clear
-                </button>
-              )}
-            </div>
           </div>
         </div>
       </section>
+
 
       {/* Filters */}
       <section className="sticky top-0 z-40 border-b border-gray-200 bg-[#f5f7fb]/95 px-4 py-4 backdrop-blur-xl">
