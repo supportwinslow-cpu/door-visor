@@ -307,10 +307,6 @@ export default function LandingPage() {
         <div className="mx-auto max-w-6xl">
           <div className="flex items-start justify-between gap-3">
             <div>
-              <p className="text-xs font-black uppercase tracking-[0.2em] text-blue-700">
-                Winslow Product Finder
-              </p>
-
               <h1 className="mt-1 text-2xl font-black leading-tight tracking-tight text-[#101827]">
                 Find Your Car Accessory
               </h1>
