@@ -1819,22 +1819,7 @@ const products = [
     "year": "2026",
     "price": 2500,
   },
-  {
-    "id": "PT-037",
-    "productType": "Parcel Tray",
-    "carName": "Sierra 2026",
-    "brandName": "Tata",
-    "year": "2026",
-    "price": 3500,
-  },
-  {
-    "id": "PT-038",
-    "productType": "Parcel Tray",
-    "carName": "E-VITARA",
-    "brandName": "Maruti",
-    "year": "2026",
-    "price": 3500,
-  },
+
 
 ];
 
