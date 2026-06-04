@@ -61,8 +61,9 @@ export default function LandingPage() {
       .join(" ")
       .toLowerCase();
 
-    if (text.includes("parcel")) return "parcel-tray";
-    if (text.includes("tray")) return "parcel-tray";
+    if (text.includes("parcel") || text.includes("tray")) {
+      return "parcel-tray";
+    }
 
     return "door-visor";
   };
@@ -137,7 +138,7 @@ export default function LandingPage() {
     return `₹${smokePrice}`;
   };
 
-  const getDisplayType = (product) => {
+  const getDisplayOption = (product) => {
     const type = getProductType(product);
 
     if (type === "parcel-tray") return "Parcel Tray";
@@ -148,16 +149,6 @@ export default function LandingPage() {
 
     return "Smoke";
   };
-
-  const brandOptions = useMemo(() => {
-    const brands = new Set();
-
-    products.forEach((product) => {
-      getProductBrands(product).forEach((brand) => brands.add(brand));
-    });
-
-    return Array.from(brands).sort((a, b) => a.localeCompare(b));
-  }, []);
 
   const getSearchText = (product) => {
     return [
@@ -193,14 +184,31 @@ export default function LandingPage() {
       getProductTypeLabel(getProductType(product)),
       `smoke ${getSmokePrice(product)}`,
       `chromeline ${getChromelinePrice(product)}`,
-      `parcel tray`,
-      `door visor`,
+      "parcel tray",
+      "door visor",
       `set ${product.set}`,
       `set of ${product.set}`,
       `price ${product.price}`,
       `₹${product.price}`,
     ].join(" ");
   };
+
+  // ✅ IMPORTANT FIX:
+  // Brand dropdown ab product type se filter nahi hoga.
+  // Isme products.js ke sare brands show honge.
+  const brandOptions = useMemo(() => {
+    const brands = new Set();
+
+    products.forEach((product) => {
+      getProductBrands(product).forEach((brand) => {
+        if (brand && brand.trim()) {
+          brands.add(brand.trim());
+        }
+      });
+    });
+
+    return Array.from(brands).sort((a, b) => a.localeCompare(b));
+  }, []);
 
   const hasActiveSelection =
     normalize(search) ||
@@ -227,6 +235,12 @@ export default function LandingPage() {
     if (selectedProductType) {
       filteredProducts = filteredProducts.filter(
         (product) => getProductType(product) === selectedProductType
+      );
+    }
+
+    if (!selectedProductType && (showSmoke || showChromeline)) {
+      filteredProducts = filteredProducts.filter(
+        (product) => getProductType(product) === "door-visor"
       );
     }
 
@@ -273,168 +287,191 @@ export default function LandingPage() {
     setShowChromeline(false);
   };
 
+  const handleProductTypeChange = (type) => {
+    setSelectedProductType(type);
+
+    if (type === "parcel-tray") {
+      setShowSmoke(false);
+      setShowChromeline(false);
+    }
+  };
+
   const shouldShowDoorVisorPricing =
-    selectedProductType === "door-visor" || selectedProductType === "";
+    selectedProductType === "door-visor" ||
+    (!selectedProductType && (showSmoke || showChromeline));
 
   return (
-    <main className="min-h-screen bg-[#eef3fb] text-[#101827]">
-      {/* TOP AREA */}
-      <section className="sticky top-0 z-50 border-b border-white/40 bg-[#eef3fb]/95 px-3 pb-3 pt-3 backdrop-blur-xl md:px-5">
-        <div className="mx-auto max-w-7xl">
-          <div className="overflow-hidden rounded-[28px] bg-linear-to-br from-[#101827] via-[#173b88] to-[#0f172a] p-4 shadow-xl">
-            <div className="mb-4 flex items-start justify-between gap-3 text-white">
-              <div>
-                <p className="mb-1 w-fit rounded-full bg-white/10 px-3 py-1 text-[10px] font-black uppercase tracking-[0.18em] text-blue-100">
-                  Product Finder
-                </p>
+    <main className="min-h-screen bg-[#f5f7fb] text-[#101827]">
+      {/* Header */}
+      <section className="border-b border-gray-200 bg-white px-4 py-4 shadow-sm">
+        <div className="mx-auto max-w-6xl">
+          <div className="flex items-start justify-between gap-3">
+            <div>
+              <p className="text-xs font-black uppercase tracking-[0.2em] text-blue-700">
+                Winslow Product Finder
+              </p>
 
-                <h1 className="text-2xl font-black leading-tight tracking-tight md:text-4xl">
-                  Find Your Car Accessories
-                </h1>
+              <h1 className="mt-1 text-2xl font-black leading-tight tracking-tight text-[#101827]">
+                Find Your Car Accessory
+              </h1>
 
-                <p className="mt-1 text-xs font-semibold text-white/70 md:text-sm">
-                  Door Visor ya Parcel Tray search karo
-                </p>
-              </div>
-
-              {hasActiveSelection && (
-                <button
-                  onClick={clearAllFilters}
-                  className="shrink-0 rounded-full bg-white px-4 py-2 text-xs font-black text-[#111827] shadow"
-                >
-                  Clear
-                </button>
-              )}
+              <p className="mt-1 text-sm font-semibold text-gray-500">
+                Door Visor aur Parcel Tray ka price instantly check karo.
+              </p>
             </div>
 
-            <div className="rounded-3xl bg-white p-3 shadow-2xl">
-              <div className="space-y-3">
-                {/* Search */}
-                <div className="flex items-center gap-2 rounded-2xl bg-[#f4f7fb] px-3 py-3 ring-1 ring-gray-200 focus-within:ring-2 focus-within:ring-blue-600">
-                  <span className="text-lg">🔍</span>
+            {hasActiveSelection && (
+              <button
+                onClick={clearAllFilters}
+                className="shrink-0 rounded-full bg-[#101827] px-4 py-2 text-xs font-black text-white shadow-sm"
+              >
+                Clear
+              </button>
+            )}
+          </div>
+        </div>
+      </section>
 
-                  <input
-                    type="text"
-                    value={search}
-                    onChange={(e) => setSearch(e.target.value)}
-                    placeholder="Search: Creta, Scorpio, Baleno..."
-                    className="w-full bg-transparent text-sm font-black text-black outline-none placeholder:text-gray-400 md:text-base"
-                  />
+      {/* Filters */}
+      <section className="sticky top-0 z-40 border-b border-gray-200 bg-[#f5f7fb]/95 px-4 py-4 backdrop-blur-xl">
+        <div className="mx-auto max-w-6xl">
+          <div className="rounded-[28px] bg-white p-3 shadow-sm ring-1 ring-gray-100">
+            <div className="space-y-3">
+              {/* Product Type Tabs */}
+              <div className="grid grid-cols-2 gap-2">
+                <button
+                  onClick={() => handleProductTypeChange("door-visor")}
+                  className={`rounded-2xl px-4 py-3 text-sm font-black transition ${selectedProductType === "door-visor"
+                      ? "bg-[#101827] text-white shadow"
+                      : "bg-[#f3f6fb] text-[#101827]"
+                    }`}
+                >
+                  Door Visor
+                </button>
 
-                  {search && (
-                    <button
-                      onClick={() => setSearch("")}
-                      className="rounded-full bg-gray-200 px-2.5 py-1.5 text-xs font-black text-gray-700"
-                    >
-                      ✕
-                    </button>
-                  )}
-                </div>
+                <button
+                  onClick={() => handleProductTypeChange("parcel-tray")}
+                  className={`rounded-2xl px-4 py-3 text-sm font-black transition ${selectedProductType === "parcel-tray"
+                      ? "bg-blue-700 text-white shadow"
+                      : "bg-[#f3f6fb] text-[#101827]"
+                    }`}
+                >
+                  Parcel Tray
+                </button>
+              </div>
 
-                {/* Product Type */}
-                <div className="relative">
-                  <select
-                    value={selectedProductType}
-                    onChange={(e) => {
-                      setSelectedProductType(e.target.value);
-                      if (e.target.value === "parcel-tray") {
-                        setShowSmoke(false);
-                        setShowChromeline(false);
-                      }
-                    }}
-                    className="w-full appearance-none rounded-2xl bg-[#f4f7fb] px-4 py-3 text-sm font-black text-[#111827] outline-none ring-1 ring-gray-200 focus:ring-2 focus:ring-blue-600 md:text-base"
+              {/* Search */}
+              <div className="flex items-center gap-2 rounded-2xl bg-[#f3f6fb] px-3 py-3 ring-1 ring-gray-200 focus-within:ring-2 focus-within:ring-blue-600">
+                <span className="text-lg">🔍</span>
+
+                <input
+                  type="text"
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  placeholder="Search car: Creta, Scorpio, Baleno..."
+                  className="w-full bg-transparent text-sm font-black text-black outline-none placeholder:text-gray-400"
+                />
+
+                {search && (
+                  <button
+                    onClick={() => setSearch("")}
+                    className="rounded-full bg-gray-200 px-2.5 py-1.5 text-xs font-black text-gray-700"
                   >
-                    <option value="">Select Product Type</option>
-                    <option value="door-visor">Door Visor</option>
-                    <option value="parcel-tray">Parcel Tray</option>
-                  </select>
-
-                  <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-sm font-black text-gray-400">
-                    ▼
-                  </span>
-                </div>
-
-                {/* Brand Select */}
-                <div className="relative">
-                  <select
-                    value={selectedBrand}
-                    onChange={(e) => setSelectedBrand(e.target.value)}
-                    className="w-full appearance-none rounded-2xl bg-[#f4f7fb] px-4 py-3 text-sm font-black text-[#111827] outline-none ring-1 ring-gray-200 focus:ring-2 focus:ring-blue-600 md:text-base"
-                  >
-                    <option value="all">Select Car Brand</option>
-                    {brandOptions.map((brand) => (
-                      <option key={brand} value={brand}>
-                        {brand}
-                      </option>
-                    ))}
-                  </select>
-
-                  <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-sm font-black text-gray-400">
-                    ▼
-                  </span>
-                </div>
-
-                {/* Door Visor Type Buttons */}
-                {shouldShowDoorVisorPricing && (
-                  <div className="grid grid-cols-2 gap-2">
-                    <label
-                      className={`flex cursor-pointer items-center justify-center gap-2 rounded-2xl px-3 py-3 text-center text-xs font-black shadow-sm ring-1 transition md:text-sm ${showSmoke
-                          ? "bg-[#111827] text-white ring-[#111827]"
-                          : "bg-[#f4f7fb] text-[#111827] ring-gray-200"
-                        }`}
-                    >
-                      <input
-                        type="checkbox"
-                        checked={showSmoke}
-                        onChange={(e) => setShowSmoke(e.target.checked)}
-                        className="hidden"
-                      />
-                      <span>{showSmoke ? "✓" : "○"}</span>
-                      Smoke
-                    </label>
-
-                    <label
-                      className={`flex cursor-pointer items-center justify-center gap-2 rounded-2xl px-3 py-3 text-center text-xs font-black shadow-sm ring-1 transition md:text-sm ${showChromeline
-                          ? "bg-blue-700 text-white ring-blue-700"
-                          : "bg-[#f4f7fb] text-[#111827] ring-gray-200"
-                        }`}
-                    >
-                      <input
-                        type="checkbox"
-                        checked={showChromeline}
-                        onChange={(e) => setShowChromeline(e.target.checked)}
-                        className="hidden"
-                      />
-                      <span>{showChromeline ? "✓" : "○"}</span>
-                      Chromeline
-                    </label>
-                  </div>
+                    ✕
+                  </button>
                 )}
               </div>
+
+              {/* Brand */}
+              <div className="relative">
+                <select
+                  value={selectedBrand}
+                  onChange={(e) => setSelectedBrand(e.target.value)}
+                  className="w-full appearance-none rounded-2xl bg-[#f3f6fb] px-4 py-3 text-sm font-black text-[#101827] outline-none ring-1 ring-gray-200 focus:ring-2 focus:ring-blue-600"
+                >
+                  <option value="all">All Brands</option>
+                  {brandOptions.map((brand) => (
+                    <option key={brand} value={brand}>
+                      {brand}
+                    </option>
+                  ))}
+                </select>
+
+                <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-xs font-black text-gray-400">
+                  ▼
+                </span>
+              </div>
+
+              {/* Door Visor Options */}
+              {selectedProductType !== "parcel-tray" && (
+                <div className="grid grid-cols-2 gap-2">
+                  <label
+                    className={`flex cursor-pointer items-center justify-center gap-2 rounded-2xl px-3 py-3 text-center text-xs font-black ring-1 transition ${showSmoke
+                        ? "bg-[#101827] text-white ring-[#101827]"
+                        : "bg-[#f3f6fb] text-[#101827] ring-gray-200"
+                      }`}
+                  >
+                    <input
+                      type="checkbox"
+                      checked={showSmoke}
+                      onChange={(e) => {
+                        setShowSmoke(e.target.checked);
+                        if (e.target.checked && !selectedProductType) {
+                          setSelectedProductType("door-visor");
+                        }
+                      }}
+                      className="hidden"
+                    />
+                    <span>{showSmoke ? "✓" : "○"}</span>
+                    Smoke
+                  </label>
+
+                  <label
+                    className={`flex cursor-pointer items-center justify-center gap-2 rounded-2xl px-3 py-3 text-center text-xs font-black ring-1 transition ${showChromeline
+                        ? "bg-blue-700 text-white ring-blue-700"
+                        : "bg-[#f3f6fb] text-[#101827] ring-gray-200"
+                      }`}
+                  >
+                    <input
+                      type="checkbox"
+                      checked={showChromeline}
+                      onChange={(e) => {
+                        setShowChromeline(e.target.checked);
+                        if (e.target.checked && !selectedProductType) {
+                          setSelectedProductType("door-visor");
+                        }
+                      }}
+                      className="hidden"
+                    />
+                    <span>{showChromeline ? "✓" : "○"}</span>
+                    Chromeline
+                  </label>
+                </div>
+              )}
             </div>
           </div>
         </div>
       </section>
 
-      {/* COUNT CARD */}
-      <section className="mx-auto max-w-7xl px-3 py-4 md:px-5">
-        <div className="rounded-[28px] bg-white p-4 shadow-sm ring-1 ring-gray-100">
+      {/* Count */}
+      <section className="mx-auto max-w-6xl px-4 py-4">
+        <div className="rounded-[26px] bg-white p-4 shadow-sm ring-1 ring-gray-100">
           <div className="flex items-center justify-between gap-3">
             <div>
-              <p className="text-[10px] font-black uppercase tracking-[0.18em] text-blue-600">
-                {hasActiveSelection ? "Products Found" : "Start Search"}
+              <p className="text-[10px] font-black uppercase tracking-[0.18em] text-blue-700">
+                {hasActiveSelection ? "Result" : "Start"}
               </p>
 
-              <h2 className="mt-1 text-2xl font-black tracking-tight md:text-4xl">
-                {hasActiveSelection ? `${displayProducts.length}` : "Search"}
+              <h2 className="mt-1 text-3xl font-black tracking-tight">
+                {hasActiveSelection ? displayProducts.length : "Search"}
               </h2>
 
-              <p className="mt-1 text-xs font-semibold text-gray-500 md:text-sm">
+              <p className="mt-1 text-xs font-semibold text-gray-500">
                 Total available: {totalProducts}
               </p>
             </div>
 
-            <div className="rounded-3xl bg-linear-to-br from-green-50 to-emerald-100 px-4 py-3 text-right">
+            <div className="rounded-3xl bg-green-50 px-4 py-3 text-right">
               <p className="text-[10px] font-black uppercase text-green-700">
                 Showing
               </p>
@@ -451,66 +488,59 @@ export default function LandingPage() {
 
           <div className="mt-4 flex flex-wrap gap-2">
             {selectedProductType && (
-              <div className="w-fit rounded-full bg-green-50 px-4 py-2 text-xs font-black text-green-700">
-                Product: {getProductTypeLabel(selectedProductType)}
-              </div>
+              <span className="rounded-full bg-blue-50 px-3 py-1.5 text-xs font-black text-blue-700">
+                {getProductTypeLabel(selectedProductType)}
+              </span>
             )}
 
             {selectedBrand !== "all" && (
-              <div className="w-fit rounded-full bg-blue-50 px-4 py-2 text-xs font-black text-blue-700">
-                Brand: {selectedBrand}
-              </div>
+              <span className="rounded-full bg-blue-50 px-3 py-1.5 text-xs font-black text-blue-700">
+                {selectedBrand}
+              </span>
+            )}
+
+            {shouldShowDoorVisorPricing && showSmoke && (
+              <span className="rounded-full bg-gray-100 px-3 py-1.5 text-xs font-black text-gray-700">
+                Smoke
+              </span>
+            )}
+
+            {shouldShowDoorVisorPricing && showChromeline && (
+              <span className="rounded-full bg-gray-100 px-3 py-1.5 text-xs font-black text-gray-700">
+                Chromeline
+              </span>
             )}
           </div>
         </div>
       </section>
 
-      {/* RESULTS */}
-      <section className="mx-auto max-w-7xl px-3 pb-10 md:px-5">
+      {/* Results */}
+      <section className="mx-auto max-w-6xl px-4 pb-10">
         {!hasActiveSelection ? (
           <StartSearchBox />
         ) : displayProducts.length > 0 ? (
-          <>
-            <div className="grid gap-3 md:hidden">
-              {displayProducts.map((product) => (
-                <MobileProductCard
+          <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
+            {displayProducts.map((product) =>
+              getProductType(product) === "parcel-tray" ? (
+                <ParcelTrayCard
+                  key={product.id}
+                  carName={getCarName(product)}
+                  year={getYear(product)}
+                  price={getDisplayPrice(product)}
+                />
+              ) : (
+                <DoorVisorCard
                   key={product.id}
                   carCompany={getBrandName(product)}
                   carName={getCarName(product)}
                   setCount={getSetCount(product)}
                   price={getDisplayPrice(product)}
                   year={getYear(product)}
-                  productType={getProductTypeLabel(getProductType(product))}
-                  visorType={getDisplayType(product)}
+                  option={getDisplayOption(product)}
                 />
-              ))}
-            </div>
-
-            <div className="hidden overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-sm md:block">
-              <div className="grid grid-cols-[1fr_1.8fr_0.8fr_1fr_1fr_1fr] gap-4 bg-[#111827] px-5 py-4 text-xs font-black uppercase tracking-[0.16em] text-white">
-                <p>Company</p>
-                <p>Car Name</p>
-                <p>Set/Type</p>
-                <p>Price</p>
-                <p>Year</p>
-                <p>Product</p>
-              </div>
-
-              <div className="divide-y divide-gray-100">
-                {displayProducts.map((product) => (
-                  <DesktopProductRow
-                    key={product.id}
-                    carCompany={getBrandName(product)}
-                    carName={getCarName(product)}
-                    setCount={getSetCount(product)}
-                    price={getDisplayPrice(product)}
-                    year={getYear(product)}
-                    productType={getProductTypeLabel(getProductType(product))}
-                  />
-                ))}
-              </div>
-            </div>
-          </>
+              )
+            )}
+          </div>
         ) : (
           <NoProducts />
         )}
@@ -522,14 +552,14 @@ export default function LandingPage() {
 function StartSearchBox() {
   return (
     <div className="rounded-[30px] bg-white p-8 text-center shadow-sm ring-1 ring-gray-100">
-      <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-[28px] bg-linear-to-br from-blue-50 to-blue-100 text-4xl">
+      <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-[28px] bg-blue-50 text-4xl">
         🚗
       </div>
 
       <h3 className="mt-5 text-2xl font-black">Search Your Product</h3>
 
       <p className="mx-auto mt-2 max-w-md text-sm font-semibold leading-6 text-gray-500">
-        Car name search karo, brand select karo, Door Visor ya Parcel Tray
+        Door Visor ya Parcel Tray select karo, car name search karo ya brand
         choose karo.
       </p>
 
@@ -537,7 +567,7 @@ function StartSearchBox() {
         {["Door Visor", "Parcel Tray", "Creta", "Scorpio"].map((item) => (
           <span
             key={item}
-            className="rounded-full bg-[#f4f7fb] px-4 py-2 text-xs font-black text-gray-600"
+            className="rounded-full bg-[#f3f6fb] px-4 py-2 text-xs font-black text-gray-600"
           >
             {item}
           </span>
@@ -547,36 +577,22 @@ function StartSearchBox() {
   );
 }
 
-function MobileProductCard({
-  carCompany,
-  carName,
-  setCount,
-  price,
-  year,
-  productType,
-  visorType,
-}) {
+function DoorVisorCard({ carCompany, carName, setCount, price, year, option }) {
   return (
     <div className="overflow-hidden rounded-[28px] bg-white shadow-sm ring-1 ring-gray-100">
-      <div className="bg-linear-to-r from-[#111827] to-[#1e3a8a] p-4 text-white">
-        <div className="flex items-start justify-between gap-3">
+      <div className="p-4">
+        <div className="mb-3 flex items-start justify-between gap-3">
           <div>
-            <div className="flex flex-wrap gap-2">
-              <p className="w-fit rounded-full bg-white/15 px-3 py-1.5 text-xs font-black">
-                {carCompany}
-              </p>
+            <span className="rounded-full bg-blue-50 px-3 py-1.5 text-xs font-black text-blue-700">
+              {carCompany}
+            </span>
 
-              <p className="w-fit rounded-full bg-white/15 px-3 py-1.5 text-xs font-black">
-                {productType}
-              </p>
-            </div>
-
-            <h3 className="mt-3 text-lg font-black leading-snug">
+            <h3 className="mt-3 text-lg font-black leading-snug text-[#101827]">
               {carName}
             </h3>
           </div>
 
-          <div className="shrink-0 rounded-2xl bg-white px-3 py-2 text-right text-[#111827]">
+          <div className="shrink-0 rounded-2xl bg-green-50 px-3 py-2 text-right">
             <p className="text-[10px] font-black uppercase text-green-600">
               Price
             </p>
@@ -585,12 +601,42 @@ function MobileProductCard({
             </p>
           </div>
         </div>
+
+        <div className="grid grid-cols-3 gap-2">
+          <MiniInfo label="Set" value={setCount} />
+          <MiniInfo label="Year" value={year} />
+          <MiniInfo label="Option" value={option} />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ParcelTrayCard({ carName, year, price }) {
+  return (
+    <div className="overflow-hidden rounded-[28px] bg-white shadow-sm ring-1 ring-blue-100">
+      <div className="bg-gradient-to-r from-blue-700 to-[#101827] p-4 text-white">
+        <p className="w-fit rounded-full bg-white/15 px-3 py-1.5 text-xs font-black">
+          Parcel Tray
+        </p>
+
+        <h3 className="mt-3 text-xl font-black leading-snug">{carName}</h3>
       </div>
 
-      <div className="grid grid-cols-3 gap-2 p-3">
-        <MiniInfo label="Set/Type" value={setCount} />
-        <MiniInfo label="Year" value={year} />
-        <MiniInfo label="Option" value={visorType} />
+      <div className="grid grid-cols-2 gap-3 p-4">
+        <div className="rounded-2xl bg-[#f3f6fb] p-3">
+          <p className="text-[10px] font-black uppercase tracking-[0.14em] text-gray-400">
+            Year
+          </p>
+          <p className="mt-1 text-sm font-black text-[#101827]">{year}</p>
+        </div>
+
+        <div className="rounded-2xl bg-green-50 p-3 text-right">
+          <p className="text-[10px] font-black uppercase tracking-[0.14em] text-green-600">
+            Price
+          </p>
+          <p className="mt-1 text-lg font-black text-green-700">{price}</p>
+        </div>
       </div>
     </div>
   );
@@ -598,43 +644,12 @@ function MobileProductCard({
 
 function MiniInfo({ label, value }) {
   return (
-    <div className="rounded-2xl bg-[#f4f7fb] p-3 text-center">
+    <div className="rounded-2xl bg-[#f3f6fb] p-3 text-center">
       <p className="text-[9px] font-black uppercase tracking-[0.14em] text-gray-400">
         {label}
       </p>
       <p className="mt-1 line-clamp-1 text-xs font-black text-gray-800">
         {value}
-      </p>
-    </div>
-  );
-}
-
-function DesktopProductRow({
-  carCompany,
-  carName,
-  setCount,
-  price,
-  year,
-  productType,
-}) {
-  return (
-    <div className="grid grid-cols-[1fr_1.8fr_0.8fr_1fr_1fr_1fr] items-center gap-4 px-5 py-5 transition hover:bg-blue-50/50">
-      <p className="w-fit rounded-full bg-blue-50 px-3 py-1.5 text-sm font-black text-blue-700">
-        {carCompany}
-      </p>
-
-      <p className="text-base font-black leading-snug text-[#111827]">
-        {carName}
-      </p>
-
-      <p className="text-sm font-black text-gray-700">{setCount}</p>
-
-      <p className="text-lg font-black text-green-700">{price}</p>
-
-      <p className="text-sm font-bold text-gray-600">{year}</p>
-
-      <p className="w-fit rounded-full bg-gray-100 px-3 py-1.5 text-sm font-black text-gray-700">
-        {productType}
       </p>
     </div>
   );
