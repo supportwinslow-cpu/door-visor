@@ -135,11 +135,6 @@ export default function LandingPage() {
       product.brand,
       product.series,
       product.category,
-      product.visorType,
-      product.doorVisorType,
-      product.finish,
-      product.type,
-      product.productType,
       ...(product.carBrand || []),
       ...(product.carModel || []),
       ...(product.tags || []),
@@ -166,14 +161,12 @@ export default function LandingPage() {
   const displayProducts = useMemo(() => {
     const query = normalize(search);
 
-    // Default me product show nahi honge
     if (!query && selectedBrand === "all" && !showSmoke && !showChromeline) {
       return [];
     }
 
     let filteredProducts = products;
 
-    // Brand select karne par us brand ki cars show hongi
     if (selectedBrand !== "all") {
       filteredProducts = filteredProducts.filter((product) =>
         getProductBrands(product).some(
@@ -182,7 +175,6 @@ export default function LandingPage() {
       );
     }
 
-    // Search filter
     if (query) {
       const queryWords = query.split(" ").filter(Boolean);
 
@@ -192,9 +184,7 @@ export default function LandingPage() {
         const compactText = compact(text);
 
         return queryWords.every((word) => {
-          return (
-            normalText.includes(word) || compactText.includes(compact(word))
-          );
+          return normalText.includes(word) || compactText.includes(compact(word));
         });
       });
     }
@@ -212,155 +202,163 @@ export default function LandingPage() {
   };
 
   return (
-    <main className="min-h-screen bg-[#f4f7fb] text-[#111827]">
-      {/* Mobile First Top Search */}
-      <section className="sticky top-0 z-50 border-b border-gray-200 bg-white/95 px-3 py-3 shadow-sm backdrop-blur-xl md:px-5">
+    <main className="min-h-screen bg-[#eef3fb] text-[#101827]">
+      {/* TOP AREA */}
+      <section className="sticky top-0 z-50 border-b border-white/40 bg-[#eef3fb]/95 px-3 pb-3 pt-3 backdrop-blur-xl md:px-5">
         <div className="mx-auto max-w-7xl">
-          <div className="mb-3 flex items-start justify-between gap-3">
-            <div>
-              <h1 className="text-xl font-black tracking-tight md:text-3xl">
-                Door Visor List
-              </h1>
+          <div className="overflow-hidden rounded-[28px] bg-gradient-to-br from-[#101827] via-[#173b88] to-[#0f172a] p-4 shadow-xl">
+            <div className="mb-4 flex items-start justify-between gap-3 text-white">
+              <div>
+                <p className="mb-1 w-fit rounded-full bg-white/10 px-3 py-1 text-[10px] font-black uppercase tracking-[0.18em] text-blue-100">
+                  Door Visor Finder
+                </p>
 
-              <p className="mt-0.5 text-xs font-semibold text-gray-500 md:text-sm">
-                Search, brand ya pricing type select karo
-              </p>
-            </div>
+                <h1 className="text-2xl font-black leading-tight tracking-tight md:text-4xl">
+                  Find Your Car Door Visor
+                </h1>
 
-            {hasActiveSelection && (
-              <button
-                onClick={clearAllFilters}
-                className="shrink-0 rounded-full bg-[#111827] px-4 py-2 text-xs font-black text-white shadow md:text-sm"
-              >
-                Clear
-              </button>
-            )}
-          </div>
+                <p className="mt-1 text-xs font-semibold text-white/70 md:text-sm">
+                  Search, brand select karo ya pricing type choose karo
+                </p>
+              </div>
 
-          <div className="space-y-3">
-            {/* Search */}
-            <div className="flex items-center gap-2 rounded-2xl bg-[#f4f7fb] px-3 py-3 ring-1 ring-gray-200 focus-within:ring-2 focus-within:ring-blue-600">
-              <span className="text-lg">🔍</span>
-
-              <input
-                type="text"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                placeholder="Search: Creta, Scorpio, Baleno..."
-                className="w-full bg-transparent text-sm font-bold text-black outline-none placeholder:text-gray-400 md:text-base"
-              />
-
-              {search && (
+              {hasActiveSelection && (
                 <button
-                  onClick={() => setSearch("")}
-                  className="rounded-full bg-gray-200 px-2.5 py-1.5 text-xs font-black text-gray-700"
+                  onClick={clearAllFilters}
+                  className="shrink-0 rounded-full bg-white px-4 py-2 text-xs font-black text-[#111827] shadow"
                 >
-                  ✕
+                  Clear
                 </button>
               )}
             </div>
 
-            {/* Brand Select */}
-            <select
-              value={selectedBrand}
-              onChange={(e) => setSelectedBrand(e.target.value)}
-              className="w-full rounded-2xl bg-white px-4 py-3 text-sm font-black text-[#111827] shadow-sm outline-none ring-1 ring-gray-200 focus:ring-2 focus:ring-blue-600 md:text-base"
-            >
-              <option value="all">Select Car Brand</option>
-              {brandOptions.map((brand) => (
-                <option key={brand} value={brand}>
-                  {brand}
-                </option>
-              ))}
-            </select>
+            <div className="rounded-[24px] bg-white p-3 shadow-2xl">
+              <div className="space-y-3">
+                {/* Search */}
+                <div className="flex items-center gap-2 rounded-2xl bg-[#f4f7fb] px-3 py-3 ring-1 ring-gray-200 focus-within:ring-2 focus-within:ring-blue-600">
+                  <span className="text-lg">🔍</span>
 
-            {/* Price Type */}
-            <div className="grid grid-cols-2 gap-2">
-              <label
-                className={`flex cursor-pointer items-center justify-center gap-2 rounded-2xl px-3 py-3 text-center text-xs font-black shadow-sm ring-1 transition md:text-sm ${
-                  showSmoke
-                    ? "bg-[#111827] text-white ring-[#111827]"
-                    : "bg-white text-[#111827] ring-gray-200"
-                }`}
-              >
-                <input
-                  type="checkbox"
-                  checked={showSmoke}
-                  onChange={(e) => setShowSmoke(e.target.checked)}
-                  className="hidden"
-                />
-                <span>{showSmoke ? "✓" : ""}</span>
-                Smoke
-              </label>
+                  <input
+                    type="text"
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                    placeholder="Search: Creta, Scorpio, Baleno..."
+                    className="w-full bg-transparent text-sm font-black text-black outline-none placeholder:text-gray-400 md:text-base"
+                  />
 
-              <label
-                className={`flex cursor-pointer items-center justify-center gap-2 rounded-2xl px-3 py-3 text-center text-xs font-black shadow-sm ring-1 transition md:text-sm ${
-                  showChromeline
-                    ? "bg-blue-700 text-white ring-blue-700"
-                    : "bg-white text-[#111827] ring-gray-200"
-                }`}
-              >
-                <input
-                  type="checkbox"
-                  checked={showChromeline}
-                  onChange={(e) => setShowChromeline(e.target.checked)}
-                  className="hidden"
-                />
-                <span>{showChromeline ? "✓" : ""}</span>
-                Chromeline
-              </label>
+                  {search && (
+                    <button
+                      onClick={() => setSearch("")}
+                      className="rounded-full bg-gray-200 px-2.5 py-1.5 text-xs font-black text-gray-700"
+                    >
+                      ✕
+                    </button>
+                  )}
+                </div>
+
+                {/* Brand Select */}
+                <div className="relative">
+                  <select
+                    value={selectedBrand}
+                    onChange={(e) => setSelectedBrand(e.target.value)}
+                    className="w-full appearance-none rounded-2xl bg-[#f4f7fb] px-4 py-3 text-sm font-black text-[#111827] outline-none ring-1 ring-gray-200 focus:ring-2 focus:ring-blue-600 md:text-base"
+                  >
+                    <option value="all">Select Car Brand</option>
+                    {brandOptions.map((brand) => (
+                      <option key={brand} value={brand}>
+                        {brand}
+                      </option>
+                    ))}
+                  </select>
+
+                  <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-sm font-black text-gray-400">
+                    ▼
+                  </span>
+                </div>
+
+                {/* Type Buttons */}
+                <div className="grid grid-cols-2 gap-2">
+                  <label
+                    className={`flex cursor-pointer items-center justify-center gap-2 rounded-2xl px-3 py-3 text-center text-xs font-black shadow-sm ring-1 transition md:text-sm ${showSmoke
+                        ? "bg-[#111827] text-white ring-[#111827]"
+                        : "bg-[#f4f7fb] text-[#111827] ring-gray-200"
+                      }`}
+                  >
+                    <input
+                      type="checkbox"
+                      checked={showSmoke}
+                      onChange={(e) => setShowSmoke(e.target.checked)}
+                      className="hidden"
+                    />
+                    <span>{showSmoke ? "✓" : "○"}</span>
+                    Smoke
+                  </label>
+
+                  <label
+                    className={`flex cursor-pointer items-center justify-center gap-2 rounded-2xl px-3 py-3 text-center text-xs font-black shadow-sm ring-1 transition md:text-sm ${showChromeline
+                        ? "bg-blue-700 text-white ring-blue-700"
+                        : "bg-[#f4f7fb] text-[#111827] ring-gray-200"
+                      }`}
+                  >
+                    <input
+                      type="checkbox"
+                      checked={showChromeline}
+                      onChange={(e) => setShowChromeline(e.target.checked)}
+                      className="hidden"
+                    />
+                    <span>{showChromeline ? "✓" : "○"}</span>
+                    Chromeline
+                  </label>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Status / Count */}
-      <section className="mx-auto max-w-7xl px-3 py-4 md:px-5 md:py-6">
-        <div className="rounded-3xl bg-white p-4 shadow-sm ring-1 ring-gray-100">
-          <p className="text-xs font-black uppercase tracking-[0.18em] text-blue-600">
-            {hasActiveSelection ? "Products" : "Start Search"}
-          </p>
-
-          <div className="mt-2 flex items-end justify-between gap-3">
+      {/* COUNT CARD */}
+      <section className="mx-auto max-w-7xl px-3 py-4 md:px-5">
+        <div className="rounded-[28px] bg-white p-4 shadow-sm ring-1 ring-gray-100">
+          <div className="flex items-center justify-between gap-3">
             <div>
-              <h2 className="text-2xl font-black tracking-tight md:text-4xl">
-                {hasActiveSelection
-                  ? `${displayProducts.length} found`
-                  : "Search to view"}
+              <p className="text-[10px] font-black uppercase tracking-[0.18em] text-blue-600">
+                {hasActiveSelection ? "Products Found" : "Start Search"}
+              </p>
+
+              <h2 className="mt-1 text-2xl font-black tracking-tight md:text-4xl">
+                {hasActiveSelection ? `${displayProducts.length}` : "Search"}
               </h2>
 
               <p className="mt-1 text-xs font-semibold text-gray-500 md:text-sm">
-                Total products available: {totalProducts}
+                Total available: {totalProducts}
               </p>
             </div>
 
-            {hasActiveSelection && (
-              <div className="rounded-2xl bg-green-50 px-3 py-2 text-right">
-                <p className="text-[10px] font-black uppercase text-green-600">
-                  Showing
-                </p>
-                <p className="text-sm font-black text-green-700">
-                  {getDisplayType()}
-                </p>
-              </div>
-            )}
+            <div className="rounded-3xl bg-gradient-to-br from-green-50 to-emerald-100 px-4 py-3 text-right">
+              <p className="text-[10px] font-black uppercase text-green-700">
+                Showing
+              </p>
+
+              <p className="text-sm font-black text-green-800">
+                {hasActiveSelection ? getDisplayType() : "None"}
+              </p>
+            </div>
           </div>
 
           {selectedBrand !== "all" && (
-            <p className="mt-3 w-fit rounded-full bg-blue-50 px-3 py-1.5 text-xs font-black text-blue-700">
+            <div className="mt-4 w-fit rounded-full bg-blue-50 px-4 py-2 text-xs font-black text-blue-700">
               Brand: {selectedBrand}
-            </p>
+            </div>
           )}
         </div>
       </section>
 
-      {/* Product Results */}
+      {/* RESULTS */}
       <section className="mx-auto max-w-7xl px-3 pb-10 md:px-5">
         {!hasActiveSelection ? (
           <StartSearchBox />
         ) : displayProducts.length > 0 ? (
           <>
-            {/* Mobile Cards */}
             <div className="grid gap-3 md:hidden">
               {displayProducts.map((product) => (
                 <MobileProductCard
@@ -375,7 +373,6 @@ export default function LandingPage() {
               ))}
             </div>
 
-            {/* Desktop Table */}
             <div className="hidden overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-sm md:block">
               <div className="grid grid-cols-[1.1fr_2fr_0.8fr_1fr_1fr_1fr] gap-4 bg-[#111827] px-5 py-4 text-xs font-black uppercase tracking-[0.16em] text-white">
                 <p>Car Company</p>
@@ -411,17 +408,28 @@ export default function LandingPage() {
 
 function StartSearchBox() {
   return (
-    <div className="rounded-3xl border border-gray-100 bg-white p-8 text-center shadow-sm">
-      <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-blue-50 text-3xl">
+    <div className="rounded-[30px] bg-white p-8 text-center shadow-sm ring-1 ring-gray-100">
+      <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-[28px] bg-gradient-to-br from-blue-50 to-blue-100 text-4xl">
         🚗
       </div>
 
       <h3 className="mt-5 text-2xl font-black">Search Your Car</h3>
 
-      <p className="mx-auto mt-2 max-w-md text-sm font-medium text-gray-500">
-        Product list dekhne ke liye car name search karo, brand select karo ya
-        Smoke / Chromeline pricing select karo.
+      <p className="mx-auto mt-2 max-w-md text-sm font-semibold leading-6 text-gray-500">
+        Car name search karo, brand select karo ya Smoke / Chromeline pricing
+        choose karo.
       </p>
+
+      <div className="mt-5 flex flex-wrap justify-center gap-2">
+        {["Creta", "Scorpio", "Baleno", "Nexon"].map((item) => (
+          <span
+            key={item}
+            className="rounded-full bg-[#f4f7fb] px-4 py-2 text-xs font-black text-gray-600"
+          >
+            {item}
+          </span>
+        ))}
+      </div>
     </div>
   );
 }
@@ -435,29 +443,31 @@ function MobileProductCard({
   visorType,
 }) {
   return (
-    <div className="rounded-3xl bg-white p-4 shadow-sm ring-1 ring-gray-100">
-      <div className="mb-3 flex items-start justify-between gap-3">
-        <div>
-          <p className="w-fit rounded-full bg-blue-50 px-3 py-1.5 text-xs font-black text-blue-700">
-            {carCompany}
-          </p>
+    <div className="overflow-hidden rounded-[28px] bg-white shadow-sm ring-1 ring-gray-100">
+      <div className="bg-gradient-to-r from-[#111827] to-[#1e3a8a] p-4 text-white">
+        <div className="flex items-start justify-between gap-3">
+          <div>
+            <p className="w-fit rounded-full bg-white/15 px-3 py-1.5 text-xs font-black">
+              {carCompany}
+            </p>
 
-          <h3 className="mt-3 text-base font-black leading-snug text-[#111827]">
-            {carName}
-          </h3>
-        </div>
+            <h3 className="mt-3 text-lg font-black leading-snug">
+              {carName}
+            </h3>
+          </div>
 
-        <div className="shrink-0 rounded-2xl bg-green-50 px-3 py-2 text-right">
-          <p className="text-[10px] font-black uppercase text-green-600">
-            Price
-          </p>
-          <p className="text-lg font-black leading-tight text-green-700">
-            {price}
-          </p>
+          <div className="shrink-0 rounded-2xl bg-white px-3 py-2 text-right text-[#111827]">
+            <p className="text-[10px] font-black uppercase text-green-600">
+              Price
+            </p>
+            <p className="text-lg font-black leading-tight text-green-700">
+              {price}
+            </p>
+          </div>
         </div>
       </div>
 
-      <div className="grid grid-cols-3 gap-2">
+      <div className="grid grid-cols-3 gap-2 p-3">
         <MiniInfo label="Set" value={setCount} />
         <MiniInfo label="Year" value={year} />
         <MiniInfo label="Type" value={visorType} />
@@ -468,7 +478,7 @@ function MobileProductCard({
 
 function MiniInfo({ label, value }) {
   return (
-    <div className="rounded-2xl bg-[#f4f7fb] p-3">
+    <div className="rounded-2xl bg-[#f4f7fb] p-3 text-center">
       <p className="text-[9px] font-black uppercase tracking-[0.14em] text-gray-400">
         {label}
       </p>
@@ -512,7 +522,7 @@ function DesktopProductRow({
 
 function NoProducts() {
   return (
-    <div className="rounded-3xl border border-gray-100 bg-white p-10 text-center shadow-sm">
+    <div className="rounded-[30px] bg-white p-10 text-center shadow-sm ring-1 ring-gray-100">
       <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-blue-50 text-3xl">
         🔎
       </div>
