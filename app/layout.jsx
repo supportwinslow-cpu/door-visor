@@ -8,7 +8,7 @@ const manrope = Manrope({
 
 
 export const metadata = {
-  title: "Smoke Door Visor",
+  title: "Door Visor Rate List ",
   description: "Car Door Visor",
 };
 

@@ -5,6 +5,8 @@ const products = [
     "brandName": "Maruti",
     "year": "Old Model",
     "price": 620,
+    "smokePrice": 620,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -13,6 +15,8 @@ const products = [
     "brandName": "Maruti",
     "year": "Old Model",
     "price": 620,
+    "smokePrice": 620,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -21,6 +25,8 @@ const products = [
     "brandName": "Maruti",
     "year": "Old Model",
     "price": 620,
+    "smokePrice": 620,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -29,6 +35,8 @@ const products = [
     "brandName": "Maruti",
     "year": "All Years",
     "price": 620,
+    "smokePrice": 620,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -37,6 +45,8 @@ const products = [
     "brandName": "Maruti",
     "year": "All Years",
     "price": 750,
+    "smokePrice": 750,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -45,6 +55,8 @@ const products = [
     "brandName": "Maruti",
     "year": "Old Model",
     "price": 750,
+    "smokePrice": 750,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -53,6 +65,8 @@ const products = [
     "brandName": "Maruti",
     "year": "New Model",
     "price": 750,
+    "smokePrice": 750,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -61,6 +75,8 @@ const products = [
     "brandName": "Maruti",
     "year": "2019-2023",
     "price": 750,
+    "smokePrice": 750,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -69,6 +85,8 @@ const products = [
     "brandName": "Maruti / Toyota",
     "year": "Old Model",
     "price": 750,
+    "smokePrice": 750,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -77,6 +95,8 @@ const products = [
     "brandName": "Maruti / Toyota",
     "year": "Old Model",
     "price": 750,
+    "smokePrice": 750,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -85,6 +105,8 @@ const products = [
     "brandName": "Maruti",
     "year": "2022",
     "price": 750,
+    "smokePrice": 750,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -93,6 +115,8 @@ const products = [
     "brandName": "Maruti",
     "year": "2022",
     "price": 750,
+    "smokePrice": 750,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -101,6 +125,8 @@ const products = [
     "brandName": "Maruti",
     "year": "2008-2011",
     "price": 750,
+    "smokePrice": 750,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -109,6 +135,8 @@ const products = [
     "brandName": "Maruti",
     "year": "2012-2016",
     "price": 750,
+    "smokePrice": 750,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -117,6 +145,8 @@ const products = [
     "brandName": "Maruti",
     "year": "2017-2023",
     "price": 750,
+    "smokePrice": 750,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -125,6 +155,8 @@ const products = [
     "brandName": "Maruti",
     "year": "2008-2011",
     "price": 750,
+    "smokePrice": 750,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -133,6 +165,8 @@ const products = [
     "brandName": "Maruti",
     "year": "2012-2017",
     "price": 750,
+    "smokePrice": 750,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -141,6 +175,8 @@ const products = [
     "brandName": "Maruti",
     "year": "2018-2023",
     "price": 750,
+    "smokePrice": 750,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -149,6 +185,8 @@ const products = [
     "brandName": "Maruti",
     "year": "All Years",
     "price": 750,
+    "smokePrice": 750,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -157,6 +195,8 @@ const products = [
     "brandName": "Maruti",
     "year": "2022",
     "price": 750,
+    "smokePrice": 750,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -165,6 +205,8 @@ const products = [
     "brandName": "Maruti",
     "year": "2021-2024",
     "price": 750,
+    "smokePrice": 750,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -173,6 +215,8 @@ const products = [
     "brandName": "Maruti",
     "year": "All Years",
     "price": 750,
+    "smokePrice": 750,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -181,6 +225,8 @@ const products = [
     "brandName": "Maruti",
     "year": "All Years",
     "price": 750,
+    "smokePrice": 750,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -189,6 +235,8 @@ const products = [
     "brandName": "Maruti",
     "year": "All Years",
     "price": 900,
+    "smokePrice": 900,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -197,6 +245,8 @@ const products = [
     "brandName": "Maruti",
     "year": "All Years",
     "price": 900,
+    "smokePrice": 900,
+    "chromelinePrice": 1125,
     "set": 4,
   },
   {
@@ -205,6 +255,8 @@ const products = [
     "brandName": "Maruti",
     "year": "All Years",
     "price": 900,
+    "smokePrice": 900,
+    "chromelinePrice": 1125,
     "set": 4,
   },
   {
@@ -213,6 +265,8 @@ const products = [
     "brandName": "Maruti",
     "year": "All Years",
     "price": 900,
+    "smokePrice": 900,
+    "chromelinePrice": 1125,
     "set": 4,
   },
   {
@@ -221,6 +275,8 @@ const products = [
     "brandName": "Maruti",
     "year": "2024",
     "price": 900,
+    "smokePrice": 900,
+    "chromelinePrice": 1125,
     "set": 4,
   },
   {
@@ -229,6 +285,8 @@ const products = [
     "brandName": "Maruti",
     "year": "2024",
     "price": 900,
+    "smokePrice": 900,
+    "chromelinePrice": 1125,
     "set": 4,
   },
   {
@@ -237,6 +295,8 @@ const products = [
     "brandName": "Maruti",
     "year": "All Years",
     "price": 1100,
+    "smokePrice": 1100,
+    "chromelinePrice": 1500,
     "set": 6,
   },
   {
@@ -245,6 +305,8 @@ const products = [
     "brandName": "Maruti",
     "year": "All Years",
     "price": 1100,
+    "smokePrice": 1100,
+    "chromelinePrice": 1500,
     "set": 6,
   },
   {
@@ -253,6 +315,8 @@ const products = [
     "brandName": "Maruti",
     "year": "All Years",
     "price": 1100,
+    "smokePrice": 1100,
+    "chromelinePrice": 1500,
     "set": 6,
   },
   {
@@ -261,6 +325,8 @@ const products = [
     "brandName": "Maruti",
     "year": "2025",
     "price": 1100,
+    "smokePrice": 1100,
+    "chromelinePrice": 1500,
     "set": 6,
   },
   {
@@ -269,6 +335,8 @@ const products = [
     "brandName": "Maruti",
     "year": "2019-2024",
     "price": 1100,
+    "smokePrice": 1100,
+    "chromelinePrice": 1500,
     "set": 6,
   },
   {
@@ -277,6 +345,8 @@ const products = [
     "brandName": "Maruti",
     "year": "Old Model",
     "price": 1100,
+    "smokePrice": 1100,
+    "chromelinePrice": 1500,
     "set": 6,
   },
   {
@@ -285,6 +355,8 @@ const products = [
     "brandName": "Maruti",
     "year": "All Years",
     "price": 1100,
+    "smokePrice": 1100,
+    "chromelinePrice": 1500,
     "set": 6,
   },
   {
@@ -293,6 +365,8 @@ const products = [
     "brandName": "Maruti",
     "year": "All Years",
     "price": 1100,
+    "smokePrice": 1100,
+    "chromelinePrice": 1500,
     "set": 6,
   },
   {
@@ -301,6 +375,8 @@ const products = [
     "brandName": "Maruti",
     "year": "All Years",
     "price": 900,
+    "smokePrice": 900,
+    "chromelinePrice": 1125,
     "set": 4,
   },
   {
@@ -309,6 +385,8 @@ const products = [
     "brandName": "Maruti",
     "year": "All Years",
     "price": 900,
+    "smokePrice": 900,
+    "chromelinePrice": 1125,
     "set": 4,
   },
   {
@@ -317,6 +395,8 @@ const products = [
     "brandName": "Hyundai",
     "year": "All Years",
     "price": 750,
+    "smokePrice": 750,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -325,6 +405,8 @@ const products = [
     "brandName": "Hyundai",
     "year": "All Years",
     "price": 750,
+    "smokePrice": 750,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -333,6 +415,8 @@ const products = [
     "brandName": "Hyundai",
     "year": "All Years",
     "price": 750,
+    "smokePrice": 750,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -341,6 +425,8 @@ const products = [
     "brandName": "Hyundai",
     "year": "All Years",
     "price": 750,
+    "smokePrice": 750,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -349,6 +435,8 @@ const products = [
     "brandName": "Hyundai",
     "year": "2022",
     "price": 750,
+    "smokePrice": 750,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -357,6 +445,8 @@ const products = [
     "brandName": "Hyundai",
     "year": "Old Model",
     "price": 750,
+    "smokePrice": 750,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -365,6 +455,8 @@ const products = [
     "brandName": "Hyundai",
     "year": "2020-2024",
     "price": 750,
+    "smokePrice": 750,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -373,6 +465,8 @@ const products = [
     "brandName": "Hyundai",
     "year": "All Years",
     "price": 750,
+    "smokePrice": 750,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -381,6 +475,8 @@ const products = [
     "brandName": "Hyundai",
     "year": "2018",
     "price": 750,
+    "smokePrice": 750,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -389,6 +485,8 @@ const products = [
     "brandName": "Hyundai",
     "year": "All Years",
     "price": 750,
+    "smokePrice": 750,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -397,6 +495,8 @@ const products = [
     "brandName": "Toyota",
     "year": "All Years",
     "price": 750,
+    "smokePrice": 750,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -405,6 +505,8 @@ const products = [
     "brandName": "Toyota",
     "year": "All Years",
     "price": 750,
+    "smokePrice": 750,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -413,6 +515,8 @@ const products = [
     "brandName": "Hyundai",
     "year": "2015-2019",
     "price": 750,
+    "smokePrice": 750,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -421,6 +525,8 @@ const products = [
     "brandName": "Hyundai",
     "year": "2020-2024",
     "price": 750,
+    "smokePrice": 750,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -429,6 +535,8 @@ const products = [
     "brandName": "Hyundai",
     "year": "All Years",
     "price": 750,
+    "smokePrice": 750,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -437,6 +545,8 @@ const products = [
     "brandName": "Hyundai",
     "year": "Old Model",
     "price": 750,
+    "smokePrice": 750,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -445,6 +555,8 @@ const products = [
     "brandName": "Hyundai",
     "year": "Old Model",
     "price": 750,
+    "smokePrice": 750,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -453,6 +565,8 @@ const products = [
     "brandName": "Hyundai",
     "year": "2023",
     "price": 900,
+    "smokePrice": 900,
+    "chromelinePrice": 1125,
     "set": 4,
   },
   {
@@ -461,6 +575,8 @@ const products = [
     "brandName": "Hyundai",
     "year": "2017-2019",
     "price": 900,
+    "smokePrice": 900,
+    "chromelinePrice": 1125,
     "set": 4,
   },
   {
@@ -469,6 +585,8 @@ const products = [
     "brandName": "Hyundai",
     "year": "2020-2022",
     "price": 900,
+    "smokePrice": 900,
+    "chromelinePrice": 1125,
     "set": 4,
   },
   {
@@ -477,6 +595,8 @@ const products = [
     "brandName": "Hyundai",
     "year": "2025",
     "price": 900,
+    "smokePrice": 900,
+    "chromelinePrice": 1125,
     "set": 4,
   },
   {
@@ -485,6 +605,8 @@ const products = [
     "brandName": "Tata",
     "year": "All Years",
     "price": 620,
+    "smokePrice": 620,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -493,6 +615,8 @@ const products = [
     "brandName": "Tata",
     "year": "All Years",
     "price": 620,
+    "smokePrice": 620,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -501,6 +625,8 @@ const products = [
     "brandName": "Tata",
     "year": "All Years",
     "price": 620,
+    "smokePrice": 620,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -509,6 +635,8 @@ const products = [
     "brandName": "Tata",
     "year": "All Years",
     "price": 750,
+    "smokePrice": 750,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -517,6 +645,8 @@ const products = [
     "brandName": "Tata",
     "year": "All Years",
     "price": 750,
+    "smokePrice": 750,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -525,6 +655,8 @@ const products = [
     "brandName": "Tata",
     "year": "All Years",
     "price": 750,
+    "smokePrice": 750,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -533,6 +665,8 @@ const products = [
     "brandName": "Tata",
     "year": "2023",
     "price": 750,
+    "smokePrice": 750,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -541,6 +675,8 @@ const products = [
     "brandName": "Tata",
     "year": "All Years",
     "price": 750,
+    "smokePrice": 750,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -549,6 +685,8 @@ const products = [
     "brandName": "Tata",
     "year": "All Years",
     "price": 750,
+    "smokePrice": 750,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -557,6 +695,8 @@ const products = [
     "brandName": "Tata",
     "year": "All Years",
     "price": 750,
+    "smokePrice": 750,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -565,6 +705,8 @@ const products = [
     "brandName": "Tata",
     "year": "All Years",
     "price": 750,
+    "smokePrice": 750,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -573,6 +715,8 @@ const products = [
     "brandName": "Tata",
     "year": "All Years",
     "price": 750,
+    "smokePrice": 750,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -581,6 +725,8 @@ const products = [
     "brandName": "Tata",
     "year": "All Years",
     "price": 750,
+    "smokePrice": 750,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -589,6 +735,8 @@ const products = [
     "brandName": "Tata",
     "year": "All Years",
     "price": 900,
+    "smokePrice": 900,
+    "chromelinePrice": 1125,
     "set": 4,
   },
   {
@@ -597,6 +745,8 @@ const products = [
     "brandName": "Tata",
     "year": "All Years",
     "price": 900,
+    "smokePrice": 900,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -605,6 +755,8 @@ const products = [
     "brandName": "Tata",
     "year": "2021-2024",
     "price": 900,
+    "smokePrice": 900,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -613,6 +765,8 @@ const products = [
     "brandName": "Mahindra",
     "year": "All Years",
     "price": 500,
+    "smokePrice": 500,
+    "chromelinePrice": 800,
     "set": 2,
   },
   {
@@ -621,6 +775,8 @@ const products = [
     "brandName": "Mahindra",
     "year": "New Model",
     "price": 500,
+    "smokePrice": 500,
+    "chromelinePrice": 800,
     "set": 2,
   },
   {
@@ -629,6 +785,8 @@ const products = [
     "brandName": "Mahindra",
     "year": "All Years",
     "price": 750,
+    "smokePrice": 750,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -637,6 +795,8 @@ const products = [
     "brandName": "Mahindra",
     "year": "All Years",
     "price": 750,
+    "smokePrice": 750,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -645,6 +805,8 @@ const products = [
     "brandName": "Mahindra",
     "year": "All Years",
     "price": 750,
+    "smokePrice": 750,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -653,6 +815,8 @@ const products = [
     "brandName": "Mahindra",
     "year": "All Years",
     "price": 750,
+    "smokePrice": 750,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -661,6 +825,8 @@ const products = [
     "brandName": "Mahindra",
     "year": "All Years",
     "price": 750,
+    "smokePrice": 750,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -669,6 +835,8 @@ const products = [
     "brandName": "Mahindra",
     "year": "All Years",
     "price": 750,
+    "smokePrice": 750,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -677,6 +845,8 @@ const products = [
     "brandName": "Mahindra",
     "year": "All Years",
     "price": 750,
+    "smokePrice": 750,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -685,6 +855,8 @@ const products = [
     "brandName": "Mahindra",
     "year": "All Years",
     "price": 750,
+    "smokePrice": 750,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -693,6 +865,8 @@ const products = [
     "brandName": "Mahindra",
     "year": "2022",
     "price": 900,
+    "smokePrice": 900,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -701,6 +875,8 @@ const products = [
     "brandName": "Mahindra",
     "year": "All Years",
     "price": 900,
+    "smokePrice": 900,
+    "chromelinePrice": 1125,
     "set": 4,
   },
   {
@@ -709,6 +885,8 @@ const products = [
     "brandName": "Mahindra",
     "year": "All Years",
     "price": 1100,
+    "smokePrice": 1100,
+    "chromelinePrice": 1500,
     "set": 6,
   },
   {
@@ -717,6 +895,8 @@ const products = [
     "brandName": "Mahindra",
     "year": "All Years",
     "price": 1100,
+    "smokePrice": 1100,
+    "chromelinePrice": 1500,
     "set": 6,
   },
   {
@@ -725,6 +905,8 @@ const products = [
     "brandName": "Mahindra",
     "year": "All Years",
     "price": 1100,
+    "smokePrice": 1100,
+    "chromelinePrice": 1500,
     "set": 6,
   },
   {
@@ -733,6 +915,8 @@ const products = [
     "brandName": "Mahindra",
     "year": "All Years",
     "price": 1100,
+    "smokePrice": 1100,
+    "chromelinePrice": 1500,
     "set": 6,
   }, {
     "id": "DV-096",
@@ -740,6 +924,8 @@ const products = [
     "brandName": "Mahindra",
     "year": "All Years",
     "price": 1100,
+    "smokePrice": 1100,
+    "chromelinePrice": 1500,
     "set": 6,
   }, {
     "id": "DV-097",
@@ -747,6 +933,8 @@ const products = [
     "brandName": "Mahindra",
     "year": "All Years",
     "price": 1100,
+    "smokePrice": 1100,
+    "chromelinePrice": 1500,
     "set": 6,
   },
   {
@@ -755,6 +943,8 @@ const products = [
     "brandName": "Mahindra",
     "year": "All Years",
     "price": 1100,
+    "smokePrice": 1100,
+    "chromelinePrice": 1500,
     "set": 6,
   },
   {
@@ -763,6 +953,8 @@ const products = [
     "brandName": "Mahindra",
     "year": "All Years",
     "price": 900,
+    "smokePrice": 900,
+    "chromelinePrice": 1125,
     "set": 4,
   },
   {
@@ -771,6 +963,8 @@ const products = [
     "brandName": "Mahindra",
     "year": "All Years",
     "price": 1100,
+    "smokePrice": 1100,
+    "chromelinePrice": 1500,
     "set": 6,
   },
   {
@@ -779,6 +973,8 @@ const products = [
     "brandName": "Mahindra",
     "year": "All Years",
     "price": 1100,
+    "smokePrice": 1100,
+    "chromelinePrice": 1500,
     "set": 6,
   },
   {
@@ -787,6 +983,8 @@ const products = [
     "brandName": "Mahindra",
     "year": "All Years",
     "price": 1100,
+    "smokePrice": 1100,
+    "chromelinePrice": 1500,
     "set": 6,
   },
   {
@@ -795,6 +993,8 @@ const products = [
     "brandName": "Honda",
     "year": "Old Model",
     "price": 750,
+    "smokePrice": 750,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -803,6 +1003,8 @@ const products = [
     "brandName": "Honda",
     "year": "2018-2023",
     "price": 750,
+    "smokePrice": 750,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -811,6 +1013,8 @@ const products = [
     "brandName": "Honda",
     "year": "All Years",
     "price": 900,
+    "smokePrice": 900,
+    "chromelinePrice": 1125,
     "set": 4,
   },
   {
@@ -819,6 +1023,8 @@ const products = [
     "brandName": "Honda",
     "year": "2020-2024",
     "price": 900,
+    "smokePrice": 900,
+    "chromelinePrice": 1125,
     "set": 4,
   },
   {
@@ -827,6 +1033,8 @@ const products = [
     "brandName": "Honda",
     "year": "2009-2013",
     "price": 900,
+    "smokePrice": 900,
+    "chromelinePrice": 1125,
     "set": 4,
   },
   {
@@ -835,6 +1043,8 @@ const products = [
     "brandName": "Honda",
     "year": "2014-2019",
     "price": 900,
+    "smokePrice": 900,
+    "chromelinePrice": 1125,
     "set": 4,
   },
   {
@@ -843,6 +1053,8 @@ const products = [
     "brandName": "Honda",
     "year": "All Years",
     "price": 900,
+    "smokePrice": 900,
+    "chromelinePrice": 1125,
     "set": 4,
   }, {
     "id": "DV-110",
@@ -850,6 +1062,8 @@ const products = [
     "brandName": "Honda",
     "year": "All Years",
     "price": 900,
+    "smokePrice": 900,
+    "chromelinePrice": 1125,
     "set": 4,
   }, {
     "id": "DV-111",
@@ -857,6 +1071,8 @@ const products = [
     "brandName": "Kia",
     "year": "All Years",
     "price": 750,
+    "smokePrice": 750,
+    "chromelinePrice": 1025,
     "set": 4,
   }, {
     "id": "DV-112",
@@ -864,6 +1080,8 @@ const products = [
     "brandName": "Kia",
     "year": "All Years",
     "price": 750,
+    "smokePrice": 750,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -872,6 +1090,8 @@ const products = [
     "brandName": "Kia",
     "year": "All Years",
     "price": 1100,
+    "smokePrice": 1100,
+    "chromelinePrice": 1500,
     "set": 6,
   },
   {
@@ -880,6 +1100,8 @@ const products = [
     "brandName": "Kia",
     "year": "All Years",
     "price": 1100,
+    "smokePrice": 1100,
+    "chromelinePrice": 1500,
     "set": 6,
   },
   {
@@ -888,6 +1110,8 @@ const products = [
     "brandName": "Kia",
     "year": "All Years",
     "price": 1100,
+    "smokePrice": 1100,
+    "chromelinePrice": 1500,
     "set": 6,
   },
   {
@@ -896,6 +1120,8 @@ const products = [
     "brandName": "Toyota",
     "year": "All Years",
     "price": 750,
+    "smokePrice": 750,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -904,6 +1130,8 @@ const products = [
     "brandName": "Toyota",
     "year": "All Years",
     "price": 900,
+    "smokePrice": 900,
+    "chromelinePrice": 1125,
     "set": 4,
   },
   {
@@ -912,6 +1140,8 @@ const products = [
     "brandName": "Toyota",
     "year": "All Years",
     "price": 900,
+    "smokePrice": 900,
+    "chromelinePrice": 1125,
     "set": 4,
   },
   {
@@ -920,6 +1150,8 @@ const products = [
     "brandName": "Toyota",
     "year": "Old Model",
     "price": 1100,
+    "smokePrice": 1100,
+    "chromelinePrice": 1500,
     "set": 4,
   },
   {
@@ -928,6 +1160,8 @@ const products = [
     "brandName": "Toyota",
     "year": "New Model",
     "price": 1100,
+    "smokePrice": 1100,
+    "chromelinePrice": 1500,
     "set": 4,
   },
   {
@@ -936,6 +1170,8 @@ const products = [
     "brandName": "Toyota",
     "year": "All Years",
     "price": 1100,
+    "smokePrice": 1100,
+    "chromelinePrice": 1500,
     "set": 6,
   },
   {
@@ -944,6 +1180,8 @@ const products = [
     "brandName": "Toyota",
     "year": "Old Model",
     "price": 1100,
+    "smokePrice": 1100,
+    "chromelinePrice": 1500,
     "set": 6,
   },
   {
@@ -952,6 +1190,8 @@ const products = [
     "brandName": "Volkswagen",
     "year": "All Years",
     "price": 750,
+    "smokePrice": 750,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -960,6 +1200,8 @@ const products = [
     "brandName": "Volkswagen",
     "year": "All Years",
     "price": 750,
+    "smokePrice": 750,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -968,6 +1210,8 @@ const products = [
     "brandName": "Volkswagen",
     "year": "All Years",
     "price": 900,
+    "smokePrice": 900,
+    "chromelinePrice": 1125,
     "set": 4,
   },
   {
@@ -976,6 +1220,8 @@ const products = [
     "brandName": "Volkswagen",
     "year": "All Years",
     "price": 900,
+    "smokePrice": 900,
+    "chromelinePrice": 1125,
     "set": 4,
   },
   {
@@ -984,6 +1230,8 @@ const products = [
     "brandName": "Volkswagen",
     "year": "All Years",
     "price": 900,
+    "smokePrice": 900,
+    "chromelinePrice": 1125,
     "set": 4,
   },
   {
@@ -992,6 +1240,8 @@ const products = [
     "brandName": "Skoda",
     "year": "All Years",
     "price": 900,
+    "smokePrice": 900,
+    "chromelinePrice": 1125,
     "set": 4,
   },
   {
@@ -1000,6 +1250,8 @@ const products = [
     "brandName": "Skoda",
     "year": "All Years",
     "price": 900,
+    "smokePrice": 900,
+    "chromelinePrice": 1125,
     "set": 4,
   },
   {
@@ -1008,6 +1260,8 @@ const products = [
     "brandName": "Skoda",
     "year": "All Years",
     "price": 900,
+    "smokePrice": 900,
+    "chromelinePrice": 1125,
     "set": 4,
   },
   {
@@ -1016,6 +1270,8 @@ const products = [
     "brandName": "Skoda",
     "year": "All Years",
     "price": 900,
+    "smokePrice": 900,
+    "chromelinePrice": 1125,
     "set": 4,
   },
   {
@@ -1024,6 +1280,8 @@ const products = [
     "brandName": "MG",
     "year": "All Years",
     "price": 900,
+    "smokePrice": 900,
+    "chromelinePrice": 1125,
     "set": 4,
   },
   {
@@ -1032,6 +1290,8 @@ const products = [
     "brandName": "MG",
     "year": "All Years",
     "price": 900,
+    "smokePrice": 900,
+    "chromelinePrice": 1125,
     "set": 4,
   },
   {
@@ -1040,6 +1300,8 @@ const products = [
     "brandName": "MG",
     "year": "All Years",
     "price": 900,
+    "smokePrice": 900,
+    "chromelinePrice": 1125,
     "set": 4,
   },
   {
@@ -1048,6 +1310,8 @@ const products = [
     "brandName": "MG",
     "year": "All Years",
     "price": 900,
+    "smokePrice": 900,
+    "chromelinePrice": 1125,
     "set": 4,
   },
   {
@@ -1056,6 +1320,8 @@ const products = [
     "brandName": "Renault",
     "year": "All Years",
     "price": 750,
+    "smokePrice": 750,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -1064,6 +1330,8 @@ const products = [
     "brandName": "Renault",
     "year": "All Years",
     "price": 750,
+    "smokePrice": 750,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -1072,6 +1340,8 @@ const products = [
     "brandName": "Renault",
     "year": "All Years",
     "price": 1100,
+    "smokePrice": 1100,
+    "chromelinePrice": 1500,
     "set": 6,
   },
   {
@@ -1080,6 +1350,8 @@ const products = [
     "brandName": "Renault",
     "year": "All Years",
     "price": 1100,
+    "smokePrice": 1100,
+    "chromelinePrice": 1500,
     "set": 6,
   },
   {
@@ -1088,6 +1360,8 @@ const products = [
     "brandName": "Nissan",
     "year": "All Years",
     "price": 750,
+    "smokePrice": 750,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -1096,6 +1370,8 @@ const products = [
     "brandName": "Nissan",
     "year": "All Years",
     "price": 1100,
+    "smokePrice": 1100,
+    "chromelinePrice": 1500,
     "set": 6,
   },
   {
@@ -1104,6 +1380,8 @@ const products = [
     "brandName": "Chevrolet",
     "year": "All Years",
     "price": 750,
+    "smokePrice": 750,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -1112,6 +1390,8 @@ const products = [
     "brandName": "Chevrolet",
     "year": "All Years",
     "price": 1100,
+    "smokePrice": 1100,
+    "chromelinePrice": 1500,
     "set": 6,
   },
   {
@@ -1120,6 +1400,8 @@ const products = [
     "brandName": "Ford",
     "year": "All Years",
     "price": 750,
+    "smokePrice": 750,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -1128,6 +1410,8 @@ const products = [
     "brandName": "Ashok Leyland",
     "year": "All Years",
     "price": 500,
+    "smokePrice": 500,
+    "chromelinePrice": 800,
     "set": 2,
   },
   {
@@ -1136,6 +1420,8 @@ const products = [
     "brandName": "Ashok Leyland",
     "year": "All Years",
     "price": 500,
+    "smokePrice": 500,
+    "chromelinePrice": 800,
     "set": 2,
   },
   {
@@ -1144,6 +1430,8 @@ const products = [
     "brandName": "Hyundai",
     "year": "All Years",
     "price": 750,
+    "smokePrice": 750,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -1152,6 +1440,8 @@ const products = [
     "brandName": "Hyundai",
     "year": "All Years",
     "price": 900,
+    "smokePrice": 900,
+    "chromelinePrice": 1125,
     "set": 4,
   },
   {
@@ -1160,6 +1450,8 @@ const products = [
     "brandName": "Mahindra",
     "year": "All Years",
     "price": 500,
+    "smokePrice": 500,
+    "chromelinePrice": 800,
     "set": 2,
   },
   {
@@ -1168,6 +1460,8 @@ const products = [
     "brandName": "Tata",
     "year": "All Years",
     "price": 1100,
+    "smokePrice": 1100,
+    "chromelinePrice": 1500,
     "set": 6,
   },
   {
@@ -1176,6 +1470,8 @@ const products = [
     "brandName": "Mahindra",
     "year": "All Years",
     "price": 750,
+    "smokePrice": 750,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -1184,6 +1480,8 @@ const products = [
     "brandName": "Toyota",
     "year": "New Model",
     "price": 1100,
+    "smokePrice": 1100,
+    "chromelinePrice": 1500,
     "set": 6,
   },
   {
@@ -1192,6 +1490,8 @@ const products = [
     "brandName": "Renault",
     "year": "All Years",
     "price": 1100,
+    "smokePrice": 1100,
+    "chromelinePrice": 1500,
     "set": 6,
   },
   {
@@ -1200,6 +1500,8 @@ const products = [
     "brandName": "Renault",
     "year": "All Years",
     "price": 750,
+    "smokePrice": 750,
+    "chromelinePrice": 1025,
     "set": 4,
   },
   {
@@ -1208,6 +1510,8 @@ const products = [
     "brandName": "Kia",
     "year": "All Years",
     "price": 1100,
+    "smokePrice": 1100,
+    "chromelinePrice": 1500,
     "set": 6,
   },
 
