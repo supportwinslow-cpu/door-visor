@@ -2,8 +2,6 @@
 
 import { useMemo, useState } from "react";
 import products from "@/app/data/products";
-// Agar file src/data/products.js me hai to upar wali line ko ye kar dena:
-// import products from "@/data/products";
 
 export default function LandingPage() {
   const [search, setSearch] = useState("");
@@ -11,6 +9,9 @@ export default function LandingPage() {
   const [selectedBrand, setSelectedBrand] = useState("all");
   const [showSmoke, setShowSmoke] = useState(false);
   const [showChromeline, setShowChromeline] = useState(false);
+  const [selectedDiscount, setSelectedDiscount] = useState(0);
+
+  const discountOptions = Array.from({ length: 11 }, (_, index) => 50 + index);
 
   const normalize = (value) => {
     return String(value || "")
@@ -117,25 +118,61 @@ export default function LandingPage() {
     return product.price;
   };
 
-  const getDisplayPrice = (product) => {
+  const applyDiscount = (price) => {
+    if (!selectedDiscount) return price;
+    return Math.round(Number(price) - (Number(price) * selectedDiscount) / 100);
+  };
+
+  const formatPrice = (price) => {
+    return `₹${applyDiscount(price)}`;
+  };
+
+  const formatOriginalPrice = (price) => {
+    return `₹${price}`;
+  };
+
+  const getBasePriceText = (product) => {
     const type = getProductType(product);
 
     if (type === "parcel-tray") {
-      return `₹${product.price}`;
+      return formatOriginalPrice(product.price);
     }
 
     const smokePrice = getSmokePrice(product);
     const chromelinePrice = getChromelinePrice(product);
 
     if (showSmoke && showChromeline) {
-      return `₹${smokePrice} / ₹${chromelinePrice}`;
+      return `${formatOriginalPrice(smokePrice)} / ${formatOriginalPrice(
+        chromelinePrice
+      )}`;
     }
 
     if (showChromeline) {
-      return `₹${chromelinePrice}`;
+      return formatOriginalPrice(chromelinePrice);
     }
 
-    return `₹${smokePrice}`;
+    return formatOriginalPrice(smokePrice);
+  };
+
+  const getDisplayPrice = (product) => {
+    const type = getProductType(product);
+
+    if (type === "parcel-tray") {
+      return formatPrice(product.price);
+    }
+
+    const smokePrice = getSmokePrice(product);
+    const chromelinePrice = getChromelinePrice(product);
+
+    if (showSmoke && showChromeline) {
+      return `${formatPrice(smokePrice)} / ${formatPrice(chromelinePrice)}`;
+    }
+
+    if (showChromeline) {
+      return formatPrice(chromelinePrice);
+    }
+
+    return formatPrice(smokePrice);
   };
 
   const getDisplayOption = (product) => {
@@ -193,9 +230,6 @@ export default function LandingPage() {
     ].join(" ");
   };
 
-  // ✅ IMPORTANT FIX:
-  // Brand dropdown ab product type se filter nahi hoga.
-  // Isme products.js ke sare brands show honge.
   const brandOptions = useMemo(() => {
     const brands = new Set();
 
@@ -275,6 +309,7 @@ export default function LandingPage() {
     selectedBrand,
     showSmoke,
     showChromeline,
+    selectedDiscount,
   ]);
 
   const totalProducts = products.length;
@@ -285,6 +320,7 @@ export default function LandingPage() {
     setSelectedBrand("all");
     setShowSmoke(false);
     setShowChromeline(false);
+    setSelectedDiscount(0);
   };
 
   const handleProductTypeChange = (type) => {
@@ -305,25 +341,46 @@ export default function LandingPage() {
       {/* Header */}
       <section className="border-b border-gray-200 bg-white px-4 py-4 shadow-sm">
         <div className="mx-auto max-w-6xl">
-          <div className="flex items-start justify-between gap-3">
+          <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <div>
               <h1 className="mt-1 text-2xl font-black leading-tight tracking-tight text-[#101827]">
                 Find Your Car Accessory
               </h1>
 
               <p className="mt-1 text-sm font-semibold text-gray-500">
-                Door Visor aur Parcel Tray ka price instantly check karo.
+                Check the price of Door Visor and Parcel Tray instantly.
               </p>
             </div>
 
-            {hasActiveSelection && (
-              <button
-                onClick={clearAllFilters}
-                className="shrink-0 rounded-full bg-[#101827] px-4 py-2 text-xs font-black text-white shadow-sm"
-              >
-                Clear
-              </button>
-            )}
+            <div className="flex items-center gap-2 md:justify-end">
+              <div className="rounded-2xl bg-[#f3f6fb] p-2 ring-1 ring-gray-200">
+                <p className="mb-1 text-[10px] font-black uppercase tracking-[0.14em] text-blue-700">
+                  Discount
+                </p>
+
+                <select
+                  value={selectedDiscount}
+                  onChange={(e) => setSelectedDiscount(Number(e.target.value))}
+                  className="w-full rounded-xl bg-white px-3 py-2 text-xs font-black text-[#101827] outline-none ring-1 ring-gray-200 focus:ring-2 focus:ring-blue-600 md:w-36"
+                >
+                  <option value={0}>No Discount</option>
+                  {discountOptions.map((discount) => (
+                    <option key={discount} value={discount}>
+                      {discount}% OFF
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              {(hasActiveSelection || selectedDiscount > 0) && (
+                <button
+                  onClick={clearAllFilters}
+                  className="shrink-0 rounded-full bg-[#101827] px-4 py-2 text-xs font-black text-white shadow-sm"
+                >
+                  Clear
+                </button>
+              )}
+            </div>
           </div>
         </div>
       </section>
@@ -338,8 +395,8 @@ export default function LandingPage() {
                 <button
                   onClick={() => handleProductTypeChange("door-visor")}
                   className={`rounded-2xl px-4 py-3 text-sm font-black transition ${selectedProductType === "door-visor"
-                      ? "bg-[#101827] text-white shadow"
-                      : "bg-[#f3f6fb] text-[#101827]"
+                    ? "bg-[#101827] text-white shadow"
+                    : "bg-[#f3f6fb] text-[#101827]"
                     }`}
                 >
                   Door Visor
@@ -348,8 +405,8 @@ export default function LandingPage() {
                 <button
                   onClick={() => handleProductTypeChange("parcel-tray")}
                   className={`rounded-2xl px-4 py-3 text-sm font-black transition ${selectedProductType === "parcel-tray"
-                      ? "bg-blue-700 text-white shadow"
-                      : "bg-[#f3f6fb] text-[#101827]"
+                    ? "bg-blue-700 text-white shadow"
+                    : "bg-[#f3f6fb] text-[#101827]"
                     }`}
                 >
                   Parcel Tray
@@ -403,8 +460,8 @@ export default function LandingPage() {
                 <div className="grid grid-cols-2 gap-2">
                   <label
                     className={`flex cursor-pointer items-center justify-center gap-2 rounded-2xl px-3 py-3 text-center text-xs font-black ring-1 transition ${showSmoke
-                        ? "bg-[#101827] text-white ring-[#101827]"
-                        : "bg-[#f3f6fb] text-[#101827] ring-gray-200"
+                      ? "bg-[#101827] text-white ring-[#101827]"
+                      : "bg-[#f3f6fb] text-[#101827] ring-gray-200"
                       }`}
                   >
                     <input
@@ -424,8 +481,8 @@ export default function LandingPage() {
 
                   <label
                     className={`flex cursor-pointer items-center justify-center gap-2 rounded-2xl px-3 py-3 text-center text-xs font-black ring-1 transition ${showChromeline
-                        ? "bg-blue-700 text-white ring-blue-700"
-                        : "bg-[#f3f6fb] text-[#101827] ring-gray-200"
+                      ? "bg-blue-700 text-white ring-blue-700"
+                      : "bg-[#f3f6fb] text-[#101827] ring-gray-200"
                       }`}
                   >
                     <input
@@ -469,15 +526,11 @@ export default function LandingPage() {
 
             <div className="rounded-3xl bg-green-50 px-4 py-3 text-right">
               <p className="text-[10px] font-black uppercase text-green-700">
-                Showing
+                Discount
               </p>
 
               <p className="text-sm font-black text-green-800">
-                {selectedProductType
-                  ? getProductTypeLabel(selectedProductType)
-                  : hasActiveSelection
-                    ? "Selected"
-                    : "None"}
+                {selectedDiscount ? `${selectedDiscount}% OFF` : "None"}
               </p>
             </div>
           </div>
@@ -492,6 +545,12 @@ export default function LandingPage() {
             {selectedBrand !== "all" && (
               <span className="rounded-full bg-blue-50 px-3 py-1.5 text-xs font-black text-blue-700">
                 {selectedBrand}
+              </span>
+            )}
+
+            {selectedDiscount > 0 && (
+              <span className="rounded-full bg-green-50 px-3 py-1.5 text-xs font-black text-green-700">
+                {selectedDiscount}% Discount Applied
               </span>
             )}
 
@@ -523,6 +582,8 @@ export default function LandingPage() {
                   carName={getCarName(product)}
                   year={getYear(product)}
                   price={getDisplayPrice(product)}
+                  originalPrice={getBasePriceText(product)}
+                  discount={selectedDiscount}
                 />
               ) : (
                 <DoorVisorCard
@@ -531,6 +592,8 @@ export default function LandingPage() {
                   carName={getCarName(product)}
                   setCount={getSetCount(product)}
                   price={getDisplayPrice(product)}
+                  originalPrice={getBasePriceText(product)}
+                  discount={selectedDiscount}
                   year={getYear(product)}
                   option={getDisplayOption(product)}
                 />
@@ -555,8 +618,7 @@ function StartSearchBox() {
       <h3 className="mt-5 text-2xl font-black">Search Your Product</h3>
 
       <p className="mx-auto mt-2 max-w-md text-sm font-semibold leading-6 text-gray-500">
-        Door Visor ya Parcel Tray select karo, car name search karo ya brand
-        choose karo.
+        Select Door Visor or Parcel Tray, then search by car name or brand and choose your option..
       </p>
 
       <div className="mt-5 flex flex-wrap justify-center gap-2">
@@ -573,7 +635,16 @@ function StartSearchBox() {
   );
 }
 
-function DoorVisorCard({ carCompany, carName, setCount, price, year, option }) {
+function DoorVisorCard({
+  carCompany,
+  carName,
+  setCount,
+  price,
+  originalPrice,
+  discount,
+  year,
+  option,
+}) {
   return (
     <div className="overflow-hidden rounded-[28px] bg-white shadow-sm ring-1 ring-gray-100">
       <div className="p-4">
@@ -592,6 +663,13 @@ function DoorVisorCard({ carCompany, carName, setCount, price, year, option }) {
             <p className="text-[10px] font-black uppercase text-green-600">
               Price
             </p>
+
+            {discount > 0 && (
+              <p className="text-xs font-black text-gray-400 line-through">
+                {originalPrice}
+              </p>
+            )}
+
             <p className="text-lg font-black leading-tight text-green-700">
               {price}
             </p>
@@ -608,7 +686,7 @@ function DoorVisorCard({ carCompany, carName, setCount, price, year, option }) {
   );
 }
 
-function ParcelTrayCard({ carName, year, price }) {
+function ParcelTrayCard({ carName, year, price, originalPrice, discount }) {
   return (
     <div className="overflow-hidden rounded-[28px] bg-white shadow-sm ring-1 ring-blue-100">
       <div className="bg-linear-to-r from-blue-700 to-[#101827] p-4 text-white">
@@ -631,6 +709,13 @@ function ParcelTrayCard({ carName, year, price }) {
           <p className="text-[10px] font-black uppercase tracking-[0.14em] text-green-600">
             Price
           </p>
+
+          {discount > 0 && (
+            <p className="text-xs font-black text-gray-400 line-through">
+              {originalPrice}
+            </p>
+          )}
+
           <p className="mt-1 text-lg font-black text-green-700">{price}</p>
         </div>
       </div>
