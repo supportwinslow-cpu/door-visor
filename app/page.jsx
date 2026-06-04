@@ -615,7 +615,7 @@ function DoorVisorCard({ carCompany, carName, setCount, price, year, option }) {
 function ParcelTrayCard({ carName, year, price }) {
   return (
     <div className="overflow-hidden rounded-[28px] bg-white shadow-sm ring-1 ring-blue-100">
-      <div className="bg-gradient-to-r from-blue-700 to-[#101827] p-4 text-white">
+      <div className="bg-linear-to-r from-blue-700 to-[#101827] p-4 text-white">
         <p className="w-fit rounded-full bg-white/15 px-3 py-1.5 text-xs font-black">
           Parcel Tray
         </p>

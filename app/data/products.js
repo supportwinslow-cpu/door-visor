@@ -1566,7 +1566,7 @@ const products = [
   {
     "id": "PT-007",
     "productType": "Parcel Tray",
-    "carName": "Nexon",
+    "carName": "Nexon till 2022",
     "brandName": "Tata",
     "year": "All Years",
     "price": 2500,
@@ -1673,7 +1673,7 @@ const products = [
     "carName": "E-Vitara",
     "brandName": "Maruti",
     "year": "2026",
-    "price": 2500,
+    "price": 3500,
   },
   {
     "id": "PT-021",
@@ -1681,17 +1681,17 @@ const products = [
     "carName": "Sierra",
     "brandName": "Tata",
     "year": "2026",
-    "price": 2500,
+    "price": 3500,
   },
-    {
+  {
     "id": "PT-022",
     "productType": "Parcel Tray",
-    "carName": "Seltos 2019 to 2022",
+    "carName": "Seltos 2019 to 2022 with Bracket",
     "brandName": "Kia",
     "year": "2019-2022",
-    "price": 2500,
+    "price": 4000,
   },
-    {
+  {
     "id": "PT-023",
     "productType": "Parcel Tray",
     "carName": "Alto k10 2022",
@@ -1699,7 +1699,7 @@ const products = [
     "year": "2022",
     "price": 2500,
   },
-    {
+  {
     "id": "PT-024",
     "productType": "Parcel Tray",
     "carName": "Swift 2024",
@@ -1707,7 +1707,7 @@ const products = [
     "year": "2024",
     "price": 2500,
   },
-    {
+  {
     "id": "PT-025",
     "productType": "Parcel Tray",
     "carName": "i20 2020 to 2024",
@@ -1715,7 +1715,7 @@ const products = [
     "year": "2020-2024",
     "price": 2500,
   },
-    {
+  {
     "id": "PT-026",
     "productType": "Parcel Tray",
     "carName": "Nios",
@@ -1723,7 +1723,7 @@ const products = [
     "year": "2026",
     "price": 2500,
   },
-    {
+  {
     "id": "PT-027",
     "productType": "Parcel Tray",
     "carName": "i20 elite 2015 to 2019",
@@ -1731,7 +1731,7 @@ const products = [
     "year": "2015-2019",
     "price": 2500,
   },
-    {
+  {
     "id": "PT-028",
     "productType": "Parcel Tray",
     "carName": "3xo",
@@ -1739,15 +1739,15 @@ const products = [
     "year": "2026",
     "price": 2500,
   },
-    {
+  {
     "id": "PT-029",
     "productType": "Parcel Tray",
     "carName": "Nios (with Bracket)",
     "brandName": "Hyundai",
     "year": "2026",
-    "price": 2500,
+    "price": 4000,
   },
-    {
+  {
     "id": "PT-030",
     "productType": "Parcel Tray",
     "carName": "Baleno 2015 to 2021",
@@ -1755,7 +1755,7 @@ const products = [
     "year": "2015-2021",
     "price": 2500,
   },
-    {
+  {
     "id": "PT-030",
     "productType": "Parcel Tray",
     "carName": "Brezza 2015 to 2021",
@@ -1763,15 +1763,15 @@ const products = [
     "year": "2015-2021",
     "price": 2500,
   },
-    {
+  {
     "id": "PT-030",
     "productType": "Parcel Tray",
     "carName": "Curvv",
     "brandName": "Tata",
     "year": "2026",
-    "price": 2500,
+    "price": 2835,
   },
-    {
+  {
     "id": "PT-031",
     "productType": "Parcel Tray",
     "carName": "Kylaq",
@@ -1779,37 +1779,61 @@ const products = [
     "year": "2026",
     "price": 2500,
   },
-    {
+  {
     "id": "PT-032",
     "productType": "Parcel Tray",
     "carName": "Windsor (with Bracket)",
     "brandName": "MG",
     "year": "2026",
-    "price": 2500,
+    "price": 4170,
   },
-    {
+  {
     "id": "PT-033",
     "productType": "Parcel Tray",
     "carName": " Creta 2015 to 2019 with Bracket",
     "brandName": "Hyundai",
     "year": "2015-2019",
-    "price": 2500,
+    "price": 4000,
   },
     {
     "id": "PT-034",
+    "productType": "Parcel Tray",
+    "carName": " Creta 2015 to 2019",
+    "brandName": "Hyundai",
+    "year": "2015-2019",
+    "price": 2500,
+  },
+  {
+    "id": "PT-035",
     "productType": "Parcel Tray",
     "carName": "Venue 2025",
     "brandName": "Hyundai",
     "year": "2025",
     "price": 2500,
   },
-    {
-    "id": "PT-035",
+  {
+    "id": "PT-036",
     "productType": "Parcel Tray",
     "carName": "Victoris",
     "brandName": "Maruti",
     "year": "2026",
     "price": 2500,
+  },
+  {
+    "id": "PT-037",
+    "productType": "Parcel Tray",
+    "carName": "Sierra 2026",
+    "brandName": "Tata",
+    "year": "2026",
+    "price": 3500,
+  },
+  {
+    "id": "PT-038",
+    "productType": "Parcel Tray",
+    "carName": "E-VITARA",
+    "brandName": "Maruti",
+    "year": "2026",
+    "price": 3500,
   },
 
 ];
